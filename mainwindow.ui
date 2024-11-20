@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>796</width>
-    <height>421</height>
+    <width>798</width>
+    <height>443</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,41 +17,141 @@
    <string notr="true">background-color: burlywood</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QStackedWidget" name="sWdgHome">
+   <widget class="QStackedWidget" name="swdgMain">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>49</y>
-      <width>771</width>
-      <height>341</height>
+      <x>0</x>
+      <y>0</y>
+      <width>781</width>
+      <height>401</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>2</number>
     </property>
-    <widget class="QWidget" name="pgeHome">
-     <widget class="QLabel" name="imgMainLogo">
+    <widget class="QWidget" name="pgeRegister">
+     <widget class="QLabel" name="lblRegisterLogo">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>80</y>
-        <width>131</width>
-        <height>181</height>
+        <x>330</x>
+        <y>30</y>
+        <width>121</width>
+        <height>111</height>
        </rect>
       </property>
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/ChicBotLogo.jpg&quot; object-fit=&quot;contain&quot; height=&quot;175&quot; width=&quot;125&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnSubmitQ">
+     <widget class="QLabel" name="lblRegister">
       <property name="geometry">
        <rect>
-        <x>560</x>
-        <y>170</y>
-        <width>75</width>
+        <x>280</x>
+        <y>150</y>
+        <width>231</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white; font: 20px; font-weight: bold;</string>
+      </property>
+      <property name="text">
+       <string>REGISTER FOR CHICBOT</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblRegisterUser">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>200</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white; font: 16px; font-weight: bold;</string>
+      </property>
+      <property name="text">
+       <string>USERNAME:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblRegisterPwd2">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>280</y>
+        <width>171</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white; font: 16px; font-weight: bold;</string>
+      </property>
+      <property name="text">
+       <string>CONFIRM PASSWORD:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblRegisterPwd">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>240</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white; font: 16px; font-weight: bold;</string>
+      </property>
+      <property name="text">
+       <string>PASSWORD:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtRegisterUser">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>200</y>
+        <width>181</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: lightgrey; border-radius: 5px;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtRegisterPwd">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>240</y>
+        <width>181</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: lightgrey; border-radius: 5px;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtRegisterPwd2">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>280</y>
+        <width>181</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: lightgrey; border-radius: 5px;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnRegister">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>320</y>
+        <width>71</width>
         <height>24</height>
        </rect>
       </property>
@@ -59,212 +159,897 @@
        <string notr="true">background-color: limegreen; color: white; font-weight: bold; border-radius: 10px</string>
       </property>
       <property name="text">
-       <string>Submit</string>
+       <string>REGISTER</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtQuery">
+     <widget class="QLabel" name="lblRegisterLogIn">
       <property name="geometry">
        <rect>
-        <x>410</x>
-        <y>140</y>
-        <width>221</width>
+        <x>110</x>
+        <y>320</y>
+        <width>131</width>
         <height>21</height>
        </rect>
       </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: white; border: 1px solid white</string>
+      <property name="text">
+       <string>&lt;a href=\&quot;&quot;&gt;Have an account? Log in&lt;/a&gt;</string>
       </property>
-      <property name="placeholderText">
-       <string>Type your thought</string>
+      <property name="openExternalLinks">
+       <bool>false</bool>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="pgeShop"/>
-    <widget class="QWidget" name="pgeCart"/>
-    <widget class="QWidget" name="pgeAccount">
-     <widget class="QStackedWidget" name="swdgAccount">
+    <widget class="QWidget" name="pgeMain">
+     <widget class="QStackedWidget" name="swdgHome">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>681</width>
-        <height>251</height>
+        <x>10</x>
+        <y>59</y>
+        <width>731</width>
+        <height>331</height>
        </rect>
       </property>
-      <property name="currentIndex">
-       <number>4</number>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
-      <widget class="QWidget" name="pgeProfileSet"/>
-      <widget class="QWidget" name="pgeOrderHist"/>
-      <widget class="QWidget" name="pgeSecuritySet"/>
-      <widget class="QWidget" name="pgePaymentSet"/>
-      <widget class="QWidget" name="pgeAddressSet">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="pgeHome">
+       <widget class="QLabel" name="imgMainLogo">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>70</y>
+          <width>131</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/ChicBotLogo.jpg&quot; object-fit=&quot;contain&quot; height=&quot;175&quot; width=&quot;125&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnSubmitQ">
+        <property name="geometry">
+         <rect>
+          <x>540</x>
+          <y>180</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: limegreen; color: white; font-weight: bold; border-radius: 10px</string>
+        </property>
+        <property name="text">
+         <string>Submit</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="txtQuery">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>140</y>
+          <width>221</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white; border: 1px solid white</string>
+        </property>
+        <property name="placeholderText">
+         <string>Type your thought</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="pgeShop"/>
+      <widget class="QWidget" name="pgeCart"/>
+      <widget class="QWidget" name="pgeAccount">
+       <widget class="QStackedWidget" name="swdgAccount">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>0</y>
+          <width>571</width>
+          <height>291</height>
+         </rect>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="pgeProfileSet">
+         <widget class="QLineEdit" name="txtChangeName">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>60</y>
+            <width>161</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: white; border-radius: 1px</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblProfile">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Profile</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblChangeName">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>60</y>
+            <width>91</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>Change name:</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnChangeName">
+          <property name="geometry">
+           <rect>
+            <x>400</x>
+            <y>230</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="pgeOrderHist">
+         <widget class="QLabel" name="lblProfile_2">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>101</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>My Orders</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblChangeName_2">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>60</y>
+            <width>91</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>Change name:</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="pgeSecuritySet">
+         <widget class="QPushButton" name="btnChangePassword">
+          <property name="geometry">
+           <rect>
+            <x>390</x>
+            <y>190</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblSecuritySet">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>161</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Security Settings</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblChangePassword">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>60</y>
+            <width>121</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>Change Password:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtChangePassword">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>60</y>
+            <width>161</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: white; border-radius: 1px</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtChangePassword2">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>90</y>
+            <width>161</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: white; border-radius: 1px</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblChangePassword2">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>90</y>
+            <width>121</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>Confirm Password:</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="pgePaymentSet">
+         <widget class="QLabel" name="lblSavedPaymentMethod">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>60</y>
+            <width>161</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>Saved Payment Methods</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblPaymentSet">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>171</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Payment Settings</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblAddPaymentMethod">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>140</y>
+            <width>161</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>Add Payment Method:</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnSavePaymentMethod">
+          <property name="geometry">
+           <rect>
+            <x>500</x>
+            <y>260</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+         <widget class="QWidget" name="widget" native="true">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>170</y>
+            <width>371</width>
+            <height>81</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: lightgrey</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="pgeAddressSet">
+         <widget class="QLabel" name="lblAddress1">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>60</y>
+            <width>321</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>1. 99 University Avenue, Kingston, ON, CA K7L 3N6</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblAddressSet">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>171</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Address Settings</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnAddAddress">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>210</y>
+            <width>81</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Add Address</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnSaveAddress">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>210</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnEditAddress">
+          <property name="geometry">
+           <rect>
+            <x>400</x>
+            <y>60</y>
+            <width>41</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: firebrick;</string>
+          </property>
+          <property name="text">
+           <string>Edit</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnRemoveAddress">
+          <property name="geometry">
+           <rect>
+            <x>460</x>
+            <y>60</y>
+            <width>51</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: firebrick;</string>
+          </property>
+          <property name="text">
+           <string>Remove</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+       </widget>
        <widget class="QWidget" name="wdgAccountSidebar" native="true">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>111</width>
-          <height>251</height>
+          <width>131</width>
+          <height>331</height>
          </rect>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: palegoldenrod
 </string>
         </property>
+        <widget class="QPushButton" name="btnProfileSet">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>40</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Profile Settings</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnOrderHist">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>70</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>My Orders</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnSecuritySet">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>100</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Security Settings</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnPaymentSet">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>130</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Payment Settings</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnAddressSet">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>160</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Address Settings</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblAccount">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna; font: 20px; font-weight: bold; Qproperty-alignment: AlignCenter</string>
+         </property>
+         <property name="text">
+          <string>My Account</string>
+         </property>
+        </widget>
        </widget>
       </widget>
+      <widget class="QWidget" name="pgeSupport"/>
+     </widget>
+     <widget class="QWidget" name="wdgHeader" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>781</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: orange</string>
+      </property>
+      <widget class="QLabel" name="lblMiniLogo">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/ChicBotLogo.jpg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnTitle">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>0</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white; font-weight: bold; font: 16px</string>
+       </property>
+       <property name="text">
+        <string>CHICBOT</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnHome">
+       <property name="geometry">
+        <rect>
+         <x>520</x>
+         <y>0</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;</string>
+       </property>
+       <property name="text">
+        <string>Home</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnShop">
+       <property name="geometry">
+        <rect>
+         <x>570</x>
+         <y>0</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;</string>
+       </property>
+       <property name="text">
+        <string>Shop</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnCart">
+       <property name="geometry">
+        <rect>
+         <x>620</x>
+         <y>0</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;</string>
+       </property>
+       <property name="text">
+        <string>Cart</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAccount">
+       <property name="geometry">
+        <rect>
+         <x>660</x>
+         <y>0</y>
+         <width>51</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;</string>
+       </property>
+       <property name="text">
+        <string>Account</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnSupport">
+       <property name="geometry">
+        <rect>
+         <x>720</x>
+         <y>0</y>
+         <width>51</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;</string>
+       </property>
+       <property name="text">
+        <string>Support</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="lblChick">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>370</y>
+        <width>21</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resources.qrc">:/ChicBotLogo.jpg</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="pgeSupport"/>
-   </widget>
-   <widget class="QWidget" name="wdgHeader" native="true">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>781</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: orange</string>
-    </property>
-    <widget class="QLabel" name="lblMiniLogo">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>21</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/ChicBotLogo.jpg</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnTitle">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>0</y>
-       <width>71</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white; font-weight: bold; font: 16px</string>
-     </property>
-     <property name="text">
-      <string>CHICBOT</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnHome">
-     <property name="geometry">
-      <rect>
-       <x>520</x>
-       <y>0</y>
-       <width>41</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;</string>
-     </property>
-     <property name="text">
-      <string>Home</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnShop">
-     <property name="geometry">
-      <rect>
-       <x>570</x>
-       <y>0</y>
-       <width>41</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;</string>
-     </property>
-     <property name="text">
-      <string>Shop</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnCart">
-     <property name="geometry">
-      <rect>
-       <x>620</x>
-       <y>0</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;</string>
-     </property>
-     <property name="text">
-      <string>Cart</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnAccount">
-     <property name="geometry">
-      <rect>
-       <x>660</x>
-       <y>0</y>
-       <width>51</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;</string>
-     </property>
-     <property name="text">
-      <string>Account</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnSupport">
-     <property name="geometry">
-      <rect>
-       <x>720</x>
-       <y>0</y>
-       <width>51</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;</string>
-     </property>
-     <property name="text">
-      <string>Support</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
+    <widget class="QWidget" name="pgeLogIn">
+     <widget class="QLabel" name="lblLogInLogo">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>30</y>
+        <width>121</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/ChicBotLogo.jpg&quot; object-fit=&quot;contain&quot; height=&quot;175&quot; width=&quot;125&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblLogIn">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>150</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white; font: 20px; font-weight: bold;</string>
+      </property>
+      <property name="text">
+       <string>LOGIN TO CHICBOT</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblLogInUser">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>200</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white; font: 16px; font-weight: bold;</string>
+      </property>
+      <property name="text">
+       <string>USERNAME:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblLogInPwd">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>240</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white; font: 16px; font-weight: bold;</string>
+      </property>
+      <property name="text">
+       <string>PASSWORD:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtLogInUser">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>200</y>
+        <width>181</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: lightgrey; border-radius: 5px;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtLogInPwd">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>240</y>
+        <width>181</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: lightgrey; border-radius: 5px;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnLogIn">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>280</y>
+        <width>71</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: limegreen; color: white; font-weight: bold; border-radius: 10px</string>
+      </property>
+      <property name="text">
+       <string>LOG IN</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblLogInRegister">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>280</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;a href=\&quot;&quot;&gt;First time? Register&lt;/a&gt;</string>
+      </property>
+      <property name="openExternalLinks">
+       <bool>false</bool>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -273,7 +1058,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>796</width>
+     <width>798</width>
      <height>22</height>
     </rect>
    </property>

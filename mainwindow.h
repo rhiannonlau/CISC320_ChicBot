@@ -32,6 +32,16 @@ private slots:
 
     void on_btnSubmitQ_clicked();
 
+    void on_btnLogIn_clicked();
+
+    void on_lblLogInRegister_linkActivated(const QString &link);
+
+    void on_btnRegister_clicked();
+
+    void on_lblRegisterLogIn_linkActivated(const QString &link);
+
+    void on_lblRegisterLogIn_2_linkActivated(const QString &link);
+
 private:
     Ui::MainWindow *ui;
 };
