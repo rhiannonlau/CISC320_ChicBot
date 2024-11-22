@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
+    <width>794</width>
     <height>443</height>
    </rect>
   </property>
@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="pgeRegister">
      <widget class="QLabel" name="lblRegisterLogo">
@@ -193,7 +193,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="pgeHome">
        <widget class="QLabel" name="imgMainLogo">
@@ -242,8 +242,371 @@
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="pgeShop"/>
-      <widget class="QWidget" name="pgeCart"/>
+      <widget class="QWidget" name="pgeShop">
+       <widget class="QLabel" name="lblShop">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>20</y>
+          <width>271</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+        </property>
+        <property name="text">
+         <string>Welcome to ChicBot Shop</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="wdgSampleItem" native="true">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>70</y>
+          <width>651</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white</string>
+        </property>
+        <widget class="QLabel" name="lblSampleItemName">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>111</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Prada Leather Jacket</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblSampleItemPrice">
+         <property name="geometry">
+          <rect>
+           <x>320</x>
+           <y>10</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>$100</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnSampleAddToCart">
+         <property name="geometry">
+          <rect>
+           <x>560</x>
+           <y>10</y>
+           <width>75</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 1px;</string>
+         </property>
+         <property name="text">
+          <string>Add to cart</string>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="wdgSearch" native="true">
+        <property name="geometry">
+         <rect>
+          <x>520</x>
+          <y>30</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white; border-radius: 10px;</string>
+        </property>
+        <widget class="QLineEdit" name="txtSearch">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>0</y>
+           <width>131</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnExitSearch">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>0</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::ApplicationExit"/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>8</width>
+           <height>8</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnSearch">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>21</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::SystemSearch"/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>10</width>
+           <height>10</height>
+          </size>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="pgeCart">
+       <widget class="QWidget" name="wdgCartSidebar" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>131</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: palegoldenrod
+</string>
+        </property>
+        <widget class="QPushButton" name="btnRemoveAll">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>40</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Remove All Items</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCart">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna; font: 20px; font-weight: bold; Qproperty-alignment: AlignCenter</string>
+         </property>
+         <property name="text">
+          <string>CART</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QLabel" name="lblCartSub">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>20</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+        </property>
+        <property name="text">
+         <string>My Cart</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblItemName">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>70</y>
+          <width>131</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: gainsboro;</string>
+        </property>
+        <property name="text">
+         <string>Item Name</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblQuantity">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>70</y>
+          <width>131</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: gainsboro;</string>
+        </property>
+        <property name="text">
+         <string>Quantity</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblPrice">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>70</y>
+          <width>131</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: gainsboro;</string>
+        </property>
+        <property name="text">
+         <string>Price</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnSampleRemoveItem">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>100</y>
+          <width>51</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: firebrick;</string>
+        </property>
+        <property name="text">
+         <string>Remove</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblTax">
+        <property name="geometry">
+         <rect>
+          <x>550</x>
+          <y>210</y>
+          <width>49</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: darkkhaki; color: white</string>
+        </property>
+        <property name="text">
+         <string>Tax:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblTotal">
+        <property name="geometry">
+         <rect>
+          <x>550</x>
+          <y>230</y>
+          <width>49</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: darkkhaki; color: white</string>
+        </property>
+        <property name="text">
+         <string>Total:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnCheckout">
+        <property name="geometry">
+         <rect>
+          <x>580</x>
+          <y>270</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: firebrick; border-radius: 1px; background-color: gainsboro</string>
+        </property>
+        <property name="text">
+         <string>Proceed to checkout</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnContinueShopping">
+        <property name="geometry">
+         <rect>
+          <x>430</x>
+          <y>270</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: firebrick; border-radius: 1px; background-color: gainsboro</string>
+        </property>
+        <property name="text">
+         <string>Continue shopping</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="pgeAccount">
        <widget class="QStackedWidget" name="swdgAccount">
         <property name="geometry">
@@ -313,15 +676,18 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-weight: bold</string>
+           <string notr="true">border-radius: 1px; font-weight: bold; background-color: lightgrey</string>
           </property>
           <property name="text">
            <string>Save</string>
           </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
          </widget>
         </widget>
         <widget class="QWidget" name="pgeOrderHist">
-         <widget class="QLabel" name="lblProfile_2">
+         <widget class="QLabel" name="lblOrderHist">
           <property name="geometry">
            <rect>
             <x>30</x>
@@ -337,7 +703,7 @@
            <string>My Orders</string>
           </property>
          </widget>
-         <widget class="QLabel" name="lblChangeName_2">
+         <widget class="QLabel" name="lblOrderHist2">
           <property name="geometry">
            <rect>
             <x>50</x>
@@ -365,10 +731,13 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-weight: bold</string>
+           <string notr="true">border-radius: 1px; font-weight: bold; background-color: lightgrey</string>
           </property>
           <property name="text">
            <string>Save</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
           </property>
          </widget>
          <widget class="QLabel" name="lblSecuritySet">
@@ -498,17 +867,20 @@
          <widget class="QPushButton" name="btnSavePaymentMethod">
           <property name="geometry">
            <rect>
-            <x>500</x>
+            <x>480</x>
             <y>260</y>
             <width>75</width>
             <height>24</height>
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-weight: bold</string>
+           <string notr="true">border-radius: 1px; font-weight: bold; background-color: lightgrey</string>
           </property>
           <property name="text">
            <string>Save</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
           </property>
          </widget>
          <widget class="QWidget" name="widget" native="true">
@@ -568,10 +940,13 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-weight: bold</string>
+           <string notr="true">border-radius: 1px; font-weight: bold; background-color: lightgrey</string>
           </property>
           <property name="text">
            <string>Add Address</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
           </property>
          </widget>
          <widget class="QPushButton" name="btnSaveAddress">
@@ -584,10 +959,13 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">font-weight: bold</string>
+           <string notr="true">border-radius: 1px; font-weight: bold; background-color: lightgrey</string>
           </property>
           <property name="text">
            <string>Save</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
           </property>
          </widget>
          <widget class="QPushButton" name="btnEditAddress">
@@ -770,28 +1148,6 @@
       <property name="styleSheet">
        <string notr="true">background-color: orange</string>
       </property>
-      <widget class="QLabel" name="lblMiniLogo">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>31</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="resources.qrc">:/ChicBotLogo.jpg</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
       <widget class="QPushButton" name="btnTitle">
        <property name="geometry">
         <rect>
@@ -906,14 +1262,43 @@
         <bool>true</bool>
        </property>
       </widget>
+      <widget class="QPushButton" name="btnMiniLogo">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/ChicBotLogo.jpg</normaloff>:/ChicBotLogo.jpg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
      </widget>
-     <widget class="QLabel" name="lblChick">
+     <widget class="QPushButton" name="btnChick">
       <property name="geometry">
        <rect>
         <x>750</x>
         <y>370</y>
-        <width>21</width>
-        <height>21</height>
+        <width>31</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -922,13 +1307,214 @@
       <property name="text">
        <string/>
       </property>
-      <property name="pixmap">
-       <pixmap resource="resources.qrc">:/ChicBotLogo.jpg</pixmap>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/ChicBotLogo.jpg</normaloff>:/ChicBotLogo.jpg</iconset>
       </property>
-      <property name="scaledContents">
+      <property name="iconSize">
+       <size>
+        <width>16</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="flat">
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QWidget" name="wdgChickOuter" native="true">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>130</y>
+        <width>191</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: dodgerblue; border-radius: 15px</string>
+      </property>
+      <widget class="QWidget" name="wdgChickInner" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>30</y>
+         <width>191</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: lightgoldenrodyellow; border-radius: 15px</string>
+       </property>
+       <widget class="QLabel" name="lblChickText">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>131</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 10px</string>
+        </property>
+        <property name="text">
+         <string>Chic: Hi, I'm Chick. Can I help you with anything?</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::AutoText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="txtChickQuery">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>170</y>
+          <width>171</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: lightgrey; border-radius: 1px</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnChickQuery">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>200</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: dodgerblue; border-radius: 7px; font: 10px</string>
+        </property>
+        <property name="text">
+         <string>Send</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblLLMDisclaimer">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>150</y>
+          <width>81</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 10px</string>
+        </property>
+        <property name="text">
+         <string>Powered by LLM</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::AutoText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblUserText">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>60</y>
+          <width>131</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 10px</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::AutoText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblChickText2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>110</y>
+          <width>131</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 10px</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::AutoText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="lblName">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>0</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white; font-weight: bold</string>
+       </property>
+       <property name="text">
+        <string>Chick</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnMinimizeChick">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>0</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-weight: bold; font: 30px</string>
+       </property>
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </widget>
+     <zorder>wdgChickOuter</zorder>
+     <zorder>swdgHome</zorder>
+     <zorder>wdgHeader</zorder>
+     <zorder>btnChick</zorder>
     </widget>
     <widget class="QWidget" name="pgeLogIn">
      <widget class="QLabel" name="lblLogInLogo">
@@ -1058,7 +1644,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>798</width>
+     <width>794</width>
      <height>22</height>
     </rect>
    </property>
