@@ -20,13 +20,15 @@ public:
 private slots:
     void on_btnLogIn_clicked();
 
+    void on_btnLogInAdmin_clicked();
+
+    void logIn(); // helper function to send user to main page and clear text
+
     void on_lblLogInRegister_linkActivated(const QString &link);
 
     void on_btnRegister_clicked();
 
     void on_lblRegisterLogIn_linkActivated(const QString &link);
-
-    void on_lblRegisterLogIn_2_linkActivated(const QString &link);
 
     void on_btnMiniLogo_clicked();
 
@@ -82,7 +84,38 @@ private slots:
 
     void on_btnSaveAddress_clicked();
 
+    void on_btnAdminProfileSet_clicked();
+
+    void on_btnAdminChangeName_clicked();
+
+    void on_btnAdminSecuritySet_clicked();
+
+    void on_btnAdminChangePassword_clicked();
+
+    void on_btnLogOut_clicked();
+
+    void on_btnAdminPanel_clicked();
+
+    void on_btnInventory_clicked();
+
+    void on_btnImportCSV_clicked();
+
+    void on_btnSaveInventory_clicked();
+
+    void on_btnOrderMan_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
+
+// class ClickAwayWidget : public QWidget {
+//     Q_OBJECT
+
+// public:
+//     explicit ClickAwayWidget(QWidget *parent = nullptr);
+//     ~ClickAwayWidget();
+
+// protected:
+//     bool eventFilter(QObject *obj, QEvent *event) override;
+// };
 #endif // MAINWINDOW_H

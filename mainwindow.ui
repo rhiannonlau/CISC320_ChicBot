@@ -193,7 +193,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="pgeHome">
        <widget class="QLabel" name="imgMainLogo">
@@ -618,7 +618,7 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="pgeProfileSet">
          <widget class="QLineEdit" name="txtChangeName">
@@ -1134,7 +1134,481 @@
         </widget>
        </widget>
       </widget>
-      <widget class="QWidget" name="pgeSupport"/>
+      <widget class="QWidget" name="pgeAdminAccount">
+       <widget class="QWidget" name="wdgAdminAccountSidebar" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>131</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: palegoldenrod
+</string>
+        </property>
+        <widget class="QPushButton" name="btnAdminProfileSet">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>40</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Profile Settings</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnAdminSecuritySet">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>70</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Security Settings</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblAdminAccount">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna; font: 20px; font-weight: bold; Qproperty-alignment: AlignCenter</string>
+         </property>
+         <property name="text">
+          <string>My Account</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QStackedWidget" name="swdgAdminAccount">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>0</y>
+          <width>571</width>
+          <height>291</height>
+         </rect>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <widget class="QWidget" name="pgeAdminProfileSet">
+         <widget class="QLabel" name="lblAdminProfile">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Profile</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblAdminChangeName">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>60</y>
+            <width>91</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>Change name:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtAdminChangeName">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>60</y>
+            <width>161</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: white; border-radius: 1px</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnAdminChangeName">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>230</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 1px; font-weight: bold; background-color: lightgrey</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="pgeAdminSecuritySet">
+         <widget class="QLabel" name="lblAdminSecuritySet">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>161</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Security Settings</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblAdminChangePassword">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>60</y>
+            <width>121</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>Change Password:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblAdminChangePassword2">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>90</y>
+            <width>121</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white; font-weight: bold; font: 14px;</string>
+          </property>
+          <property name="text">
+           <string>Confirm Password:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtAdminChangePassword">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>60</y>
+            <width>161</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: white; border-radius: 1px</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtAdminChangePassword2">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>90</y>
+            <width>161</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: white; border-radius: 1px</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnAdminChangePassword">
+          <property name="geometry">
+           <rect>
+            <x>420</x>
+            <y>220</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 1px; font-weight: bold; background-color: lightgrey</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="pgeSupport">
+       <widget class="QWidget" name="wdgSupportSidebar" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>131</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: palegoldenrod
+</string>
+        </property>
+        <widget class="QPushButton" name="btnLogOut">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>40</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Log Out</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblSupport">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna; font: 20px; font-weight: bold; Qproperty-alignment: AlignCenter</string>
+         </property>
+         <property name="text">
+          <string>SUPPORT</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="pgeAdminPanel">
+       <widget class="QWidget" name="wdgAdminPanelSidebar" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>131</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: palegoldenrod
+</string>
+        </property>
+        <widget class="QPushButton" name="btnInventory">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>40</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Inventory</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnOrderMan">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>70</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna;</string>
+         </property>
+         <property name="text">
+          <string>Order Management</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblAdminPanel">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>131</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: sienna; font: 20px; font-weight: bold; Qproperty-alignment: AlignCenter</string>
+         </property>
+         <property name="text">
+          <string>Admin Panel</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QStackedWidget" name="swdgAdminPanel">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>0</y>
+          <width>571</width>
+          <height>291</height>
+         </rect>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="pgeInventory">
+         <widget class="QLabel" name="lblInventory">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>161</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Inventory</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnImportCSV">
+          <property name="geometry">
+           <rect>
+            <x>450</x>
+            <y>30</y>
+            <width>91</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: darkkhaki</string>
+          </property>
+          <property name="text">
+           <string>Import .csv file</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnSaveInventory">
+          <property name="geometry">
+           <rect>
+            <x>440</x>
+            <y>210</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 1px; font-weight: bold; background-color: lightgrey</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QWidget" name="wdgImportCSV" native="true">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>90</y>
+            <width>131</width>
+            <height>81</height>
+           </rect>
+          </property>
+          <widget class="QLabel" name="lblFilePath">
+           <property name="geometry">
+            <rect>
+             <x>50</x>
+             <y>30</y>
+             <width>49</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="pgeOrderMan">
+         <widget class="QLabel" name="lblOrderMan">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>191</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: darkslategray; font: 20px; font-weight: bold</string>
+          </property>
+          <property name="text">
+           <string>Order Management</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
      </widget>
      <widget class="QWidget" name="wdgHeader" native="true">
       <property name="geometry">
@@ -1286,6 +1760,28 @@
          <width>16</width>
          <height>16</height>
         </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAdminPanel">
+       <property name="geometry">
+        <rect>
+         <x>420</x>
+         <y>0</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="whatsThis">
+        <string/>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:red; color: white; font-weight: bold; border-radius: 5px</string>
+       </property>
+       <property name="text">
+        <string>Admin Panel</string>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -1634,6 +2130,22 @@
       </property>
       <property name="openExternalLinks">
        <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnLogInAdmin">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>310</y>
+        <width>71</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: limegreen; color: white; font-weight: bold; border-radius: 10px</string>
+      </property>
+      <property name="text">
+       <string>ADMIN</string>
       </property>
      </widget>
     </widget>
