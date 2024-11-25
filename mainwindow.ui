@@ -193,7 +193,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="pgeHome">
        <widget class="QLabel" name="imgMainLogo">
@@ -1588,6 +1588,56 @@
            </property>
           </widget>
          </widget>
+         <widget class="QLabel" name="lblChickText">
+          <property name="geometry">
+           <rect>
+            <x>260</x>
+            <y>200</y>
+            <width>131</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 10px</string>
+          </property>
+          <property name="text">
+           <string>Chic: Hi, I'm Chick. Can I help you with anything?</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::TextFormat::AutoText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblUserText">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>200</y>
+            <width>131</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 10px</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::TextFormat::AutoText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="pgeOrderMan">
          <widget class="QLabel" name="lblOrderMan">
@@ -1818,14 +1868,6 @@
       </property>
      </widget>
      <widget class="QWidget" name="wdgChickOuter" native="true">
-      <property name="geometry">
-       <rect>
-        <x>570</x>
-        <y>130</y>
-        <width>191</width>
-        <height>261</height>
-       </rect>
-      </property>
       <property name="styleSheet">
        <string notr="true">background-color: dodgerblue; border-radius: 15px</string>
       </property>
@@ -1841,31 +1883,6 @@
        <property name="styleSheet">
         <string notr="true">background-color: lightgoldenrodyellow; border-radius: 15px</string>
        </property>
-       <widget class="QLabel" name="lblChickText">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>131</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 10px</string>
-        </property>
-        <property name="text">
-         <string>Chic: Hi, I'm Chick. Can I help you with anything?</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::TextFormat::AutoText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QLineEdit" name="txtChickQuery">
         <property name="geometry">
          <rect>
@@ -1899,7 +1916,7 @@
         <property name="geometry">
          <rect>
           <x>60</x>
-          <y>150</y>
+          <y>200</y>
           <width>81</width>
           <height>20</height>
          </rect>
@@ -1915,31 +1932,6 @@
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lblUserText">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>60</y>
-          <width>131</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 10px</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::TextFormat::AutoText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -1967,6 +1959,19 @@
          <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
         <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="tEChick">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>191</width>
+          <height>161</height>
+         </rect>
+        </property>
+        <property name="readOnly">
          <bool>true</bool>
         </property>
        </widget>
@@ -2007,10 +2012,6 @@
        </property>
       </widget>
      </widget>
-     <zorder>wdgChickOuter</zorder>
-     <zorder>swdgHome</zorder>
-     <zorder>wdgHeader</zorder>
-     <zorder>btnChick</zorder>
     </widget>
     <widget class="QWidget" name="pgeLogIn">
      <widget class="QLabel" name="lblLogInLogo">

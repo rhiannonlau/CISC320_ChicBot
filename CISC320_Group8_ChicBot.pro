@@ -9,10 +9,12 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    csv_utils.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    csv_utils.h \
     mainwindow.h
 
 FORMS += \
@@ -25,3 +27,18 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+INCLUDEPATH += vcpkg\installed\x64-windows\include
+DEFINES += JSON_USE_IMPLICIT_CONVERSIONS=1
+
+# Adjust the path to match your curl installation directory
+CURL_DIR = $$PWD/curl-8.10.1_6-win64-mingw
+
+# Include path for curl headers
+INCLUDEPATH += $$CURL_DIR/include
+
+# Link against curl library
+LIBS += -L$$CURL_DIR/lib -lcurl
+
+# If you're using MinGW, you might need this specific library name
+# LIBS += -L$$CURL_DIR/lib -lcurl.dll
