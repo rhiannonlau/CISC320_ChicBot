@@ -27,14 +27,8 @@ using json = nlohmann::json;
 // #include <QPushButton>
 
 bool admin = false;
-QString logInUser, logInPwd;
-QString registerUser, registerPwd, registerPwd2;
 QString query;
-QString search;
-QString changeName;
-QString changePwd, changePwd2;
-QString newAddress;
-// QString file;
+// QString search;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -55,37 +49,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// ClickAwayWidget::ClickAwayWidget(QWidget *parent) : QWidget(parent) {
-//     setWindowFlags(Qt::Popup); // Makes the widget act like a popup
-
-//     QVBoxLayout *layout = new QVBoxLayout(this);
-//     QPushButton *button = new QPushButton("Inside Widget", this);
-//     layout->addWidget(button);
-
-//     // Install event filter for global mouse click detection
-//     qApp->installEventFilter(this);
-// }
-
-// ClickAwayWidget::~ClickAwayWidget() {
-//     qApp->removeEventFilter(this);
-// }
-
-// bool ClickAwayWidget::eventFilter(QObject *obj, QEvent *event) {
-//     if (event->type() == QEvent::MouseButtonPress) {
-//         QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
-//         if (!this->geometry().contains(mouseEvent->globalPos())) {
-//             this->hide(); // Hide widget if click is outside its bounds
-//         }
-//     }
-//     return QWidget::eventFilter(obj, event);
-// }
-
+// after entering username and pwd, they press log in button
+// for testing purposes, i set this to just log in no matter what for now
 void MainWindow::on_btnLogIn_clicked()
 {
     bool valid = true;
 
-    logInUser = ui->txtLogInUser->text();
-    logInPwd = ui->txtLogInPwd->text();
+    QString logInUser = ui->txtLogInUser->text();
+    QString logInPwd = ui->txtLogInPwd->text();
 
     // check if valid as user and/or admin
     // if valid as admin, set admin = true;
@@ -108,6 +79,8 @@ void MainWindow::on_btnLogIn_clicked()
     // clear text afterwards if not valid?
 }
 
+// helper func
+// changes all the screens, assumes log in has been validated
 void MainWindow::logIn()
 {
     ui->swdgHome->setCurrentIndex(0); // home
@@ -116,7 +89,8 @@ void MainWindow::logIn()
     ui->txtLogInPwd->clear();
 }
 
-
+// temporary button for testing: allows quick log in as admin
+// i.e. will log in even with no username or pwd
 void MainWindow::on_btnLogInAdmin_clicked()
 {
     admin = true;
@@ -126,21 +100,22 @@ void MainWindow::on_btnLogInAdmin_clicked()
     ui->swdgHome->setCurrentIndex(0); // home
 }
 
+// user has no account, so they go from log in page to registration page
 void MainWindow::on_lblLogInRegister_linkActivated(const QString &link)
 {
     ui->swdgMain->setCurrentIndex(0); // registration page
 }
 
-
+// user enters a username and pwd then presses the "register" button
 void MainWindow::on_btnRegister_clicked()
 {
     bool valid = false;
 
-    registerUser = ui->txtRegisterUser->text();
+    QString registerUser = ui->txtRegisterUser->text();
     // check if username free
 
-    registerPwd = ui->txtRegisterPwd->text();
-    registerPwd2 = ui->txtRegisterPwd2->text();
+    QString registerPwd = ui->txtRegisterPwd->text();
+    QString registerPwd2 = ui->txtRegisterPwd2->text();
 
     if (valid) // replace valid with condition
     {
@@ -154,44 +129,46 @@ void MainWindow::on_btnRegister_clicked()
     // clear text afterwards if not valid?
 }
 
-
+// user has account, so they go from registration page to log in page
 void MainWindow::on_lblRegisterLogIn_linkActivated(const QString &link)
 {
     ui->swdgMain->setCurrentIndex(2); // log in page
 }
 
+// mini logo in the header bar, sends user to home page
 void MainWindow::on_btnMiniLogo_clicked()
 {
     ui->swdgHome->setCurrentIndex(0); // home page
 }
 
-
+// website title in header bar, sends user to home page
 void MainWindow::on_btnTitle_clicked()
 {
     ui->swdgHome->setCurrentIndex(0); // home page
 }
 
-
+// home tab in header clicked
 void MainWindow::on_btnHome_clicked()
 {
     ui->swdgHome->setCurrentIndex(0); // home page
 }
 
-
+// shop tab in header clicked
 void MainWindow::on_btnShop_clicked()
 {
     ui->swdgHome->setCurrentIndex(1); // shop page
 }
 
-
+// cart tab in header clicked
 void MainWindow::on_btnCart_clicked()
 {
     ui->swdgHome->setCurrentIndex(2); // cart page
 }
 
-
+// account tab in header clicked
 void MainWindow::on_btnAccount_clicked()
 {
+    // diff account pages for an admin vs non admin account
     if (!admin)
     {
         ui->swdgHome->setCurrentIndex(3); // account page
@@ -206,12 +183,14 @@ void MainWindow::on_btnAccount_clicked()
 }
 
 
+// support tab in header clicked
 void MainWindow::on_btnSupport_clicked()
 {
     ui->swdgHome->setCurrentIndex(5); // support page
 }
 
-
+// chatbot logo in bottom right corner clicked
+// chatbot popup appears
 void MainWindow::on_btnChick_clicked()
 {
     ui->wdgChickOuter->show();
@@ -231,37 +210,40 @@ void MainWindow::on_btnChick_clicked()
 // }
 
 
+// minimize button on chatbot
 void MainWindow::on_btnMinimizeChick_clicked()
 {
     ui->wdgChickOuter->hide();
 }
 
+// in home page, user typed in a query and pressed submit
 void MainWindow::on_btnSubmitQ_clicked()
 {
     query = ui->txtQuery->text();
 
     if (!query.isEmpty())
     {
+        // send query to chatbot and show in popup
         ui->txtQuery->clear();
         ui->wdgChickOuter->show();
         // ui->lblUserText->setText(query);
     }
 }
 
-
+// search option in shop tab
 void MainWindow::on_btnSearch_clicked()
 {
-    search = ui->txtSearch->text();
+    QString search = ui->txtSearch->text();
     ui->txtSearch->clear();
 }
 
-
+// clears search line in shop tab
 void MainWindow::on_btnExitSearch_clicked()
 {
     ui->txtSearch->clear();
 }
 
-
+// sample add to cart button
 void MainWindow::on_btnSampleAddToCart_clicked()
 {
     // add to cart
@@ -269,99 +251,110 @@ void MainWindow::on_btnSampleAddToCart_clicked()
     // send a message that it was added to cart
 }
 
-
+// remove all items from cart
 void MainWindow::on_btnRemoveAll_clicked()
 {
-    // remove all items from cart
+
 }
 
-
+// continue shopping: return to shop page
 void MainWindow::on_btnContinueShopping_clicked()
 {
     ui->swdgHome->setCurrentIndex(1); // shop page
 }
 
-
+// checkout btn
 void MainWindow::on_btnCheckout_clicked()
 {
 
 }
 
-
+// profile settings tab in account page clicked
 void MainWindow::on_btnProfileSet_clicked()
 {
     ui->swdgAccount->setCurrentIndex(0); // account, profile page
 }
 
-
+// user wants to change their name
 void MainWindow::on_btnChangeName_clicked()
 {
-    changeName = ui->txtChangeName->text();
-    // check if name is valid
-    // change name to changeName
-    ui->txtChangeName->clear();
-    // some kind of success message
+    QString changeName = ui->txtChangeName->text();
+
+    if (!changeName.isEmpty())
+    {
+        // check if name is valid
+        // change name to changeName
+        ui->txtChangeName->clear();
+        // some kind of success message
+    }
 }
 
-
+// order history tab in account page clicked
 void MainWindow::on_btnOrderHist_clicked()
 {
     ui->swdgAccount->setCurrentIndex(1); // account order hist page
 }
 
-
+// security settings tab in account page clicked
 void MainWindow::on_btnSecuritySet_clicked()
 {
-    ui->swdgAccount->setCurrentIndex(2); // account order hist page
+    ui->swdgAccount->setCurrentIndex(2); // account security settings page
 }
 
-
+// users can change their password in security settings
 void MainWindow::on_btnChangePassword_clicked()
 {
-    changePwd = ui->txtChangePassword->text();
-    changePwd2 = ui->txtChangePassword2->text();
+    QString changePwd = ui->txtChangePassword->text();
+    QString changePwd2 = ui->txtChangePassword2->text();
 
     ui->txtChangePassword->clear();
     ui->txtChangePassword2->clear();
 
-    if (changePwd == changePwd2)
+    if (changePwd == changePwd2 && !changePwd.isEmpty())
     {
         // change password in database
         // some kind of success message
     }
 }
 
-
+// payment settings tab in account page clicked
 void MainWindow::on_btnPaymentSet_clicked()
 {
     ui->swdgAccount->setCurrentIndex(3); // account payment page
 }
 
-
+// user adds another payment method
 void MainWindow::on_btnSavePaymentMethod_clicked()
 {
 
 }
 
-
+// address settings tab in account page clicked
 void MainWindow::on_btnAddressSet_clicked()
 {
     ui->swdgAccount->setCurrentIndex(4); // account address page
 }
 
-
+// user wants to add another address
 void MainWindow::on_btnAddAddress_clicked()
 {
-    // newAddress = ui->txtAddress
+
 }
 
-
+// user adds another address
 void MainWindow::on_btnSaveAddress_clicked()
 {
+    //QString newAddress = ui->txtAddress->text();
+    QString newAddress;
 
+    if (!newAddress.isEmpty())
+    {
+        // add address
+        newAddress = "";
+    }
 }
 
-
+// accounts page, profile settings, admin version
 void MainWindow::on_btnAdminProfileSet_clicked()
 {
     ui->swdgAdminAccount->setCurrentIndex(0); // admin profile
@@ -370,14 +363,18 @@ void MainWindow::on_btnAdminProfileSet_clicked()
 
 void MainWindow::on_btnAdminChangeName_clicked()
 {
-    changeName = ui->txtAdminChangeName->text();
-    // check if name is valid
-    // change name to changeName
-    ui->txtAdminChangeName->clear();
-    // some kind of success message
+    QString changeName = ui->txtAdminChangeName->text();
+
+    if (!changeName.isEmpty())
+    {
+        // check if name is valid
+        // change name to changeName
+        ui->txtAdminChangeName->clear();
+        // some kind of success message
+    }
 }
 
-
+// accounts page, security settings, admin version
 void MainWindow::on_btnAdminSecuritySet_clicked()
 {
     ui->swdgAdminAccount->setCurrentIndex(1); // admin security
@@ -386,13 +383,13 @@ void MainWindow::on_btnAdminSecuritySet_clicked()
 
 void MainWindow::on_btnAdminChangePassword_clicked()
 {
-    changePwd = ui->txtAdminChangePassword->text();
-    changePwd2 = ui->txtAdminChangePassword2->text();
+    QString changePwd = ui->txtAdminChangePassword->text();
+    QString changePwd2 = ui->txtAdminChangePassword2->text();
 
     ui->txtAdminChangePassword->clear();
     ui->txtAdminChangePassword2->clear();
 
-    if (changePwd == changePwd2)
+    if (changePwd == changePwd2 && !changePwd.isEmpty())
     {
         // change password in database
 
@@ -400,54 +397,58 @@ void MainWindow::on_btnAdminChangePassword_clicked()
     }
 }
 
-
+// log out button in support page
 void MainWindow::on_btnLogOut_clicked()
 {
     ui->swdgMain->setCurrentIndex(2); // log in page
 }
 
-
+// switch to admin panel page when user clicks admin panel button, only shows for admin accounts
 void MainWindow::on_btnAdminPanel_clicked()
 {
     ui->swdgHome->setCurrentIndex(6); // admin panel
     ui->swdgAdminPanel->setCurrentIndex(0); // inventory
 }
 
-
+// user clicked on inventory tab in admin panel
 void MainWindow::on_btnInventory_clicked()
 {
     ui->swdgAdminPanel->setCurrentIndex(0); // inventory
 }
 
-
+// user selected import csv, open file explorer and let them select a file
 void MainWindow::on_btnImportCSV_clicked()
 {
     QString file = QFileDialog::getOpenFileName(this, "Select a File", QDir::homePath(), "All Files (*.*);;Text Files (*.txt)");
 
-    if (!file.isEmpty()) {
+    if (!file.isEmpty())
+    {
         // ui->lblFilePath->setText(filePath);
         // load stuff
 
     }
 
-    else {
-        QMessageBox::information(this, "No File Selected", "You did not select any file.");
+    else
+    {
+        QMessageBox::information(this, "No File Selected", "You did not select a file.");
     }
 }
 
-
+// save inventory changes
 void MainWindow::on_btnSaveInventory_clicked()
 {
 
 }
 
-
+// switch to order management tab in admin panel
 void MainWindow::on_btnOrderMan_clicked()
 {
     ui->swdgAdminPanel->setCurrentIndex(1); // order management
 }
 
-// ////////////////////////////////////////////////////////
+
+
+// LLM CODE ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Callback function to capture the response data
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
@@ -553,8 +554,12 @@ void import_csv(QString qFile)
     // std::string matchedItems = retrieveItems(clothing_info, csvItems);
 }
 
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// CHAT BOT ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// i commented out all the cout and cin code
+// initialization of curl and message structure/history is done in this constructor
+// the variables are made in mainwindow.h
+// and then used by the chatbot in generateResponse()
+// -rhi
 ChatBotWindow::ChatBotWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -613,24 +618,25 @@ ChatBotWindow::ChatBotWindow(QWidget *parent)
 }
 
 ChatBotWindow::~ChatBotWindow() {
-    delete ui; // Clean up the UI object
+    delete ui;
 }
 
 void ChatBotWindow::sendMessage() {
-    // Get the user input from the line edit
+    // get the user's query
     QString message = ui->txtChickQuery->text();
+
     if (!message.isEmpty()) {
-        // Display user message in the text edit
+        // display user message
         ui->tEChick->append("You: " + message);
 
-        // Generate and display bot response
+        // generate and display bot response
         QString botResponse = generateResponse(message);
         ui->tEChick->append("Chick: " + botResponse);
 
-        // Clear the input field
+        // clear the input
         ui->txtChickQuery->clear();
 
-        // Auto-scroll to the bottom of the text edit
+        // auto-scroll to the bottom
         QScrollBar *scrollBar = ui->tEChick->verticalScrollBar();
         scrollBar->setValue(scrollBar->maximum());
     }
@@ -667,7 +673,7 @@ QString ChatBotWindow::generateResponse(QString query) {
     curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:1234/v1/chat/completions");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl, CURLOPT_POST, 1L);
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data_structured.c_str());
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data_structured.c_str()); // THE CODE IS CURRENTLY CRASHING AROUND HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string_structured);
 
@@ -743,8 +749,8 @@ QString ChatBotWindow::generateResponse(QString query) {
         // std::cout << "Raw Response (Structured Output): " << response_string_structured << std::endl;
     }
 
-    QString q_assistant_message = QString::fromStdString(assistant_message);
-    return q_assistant_message;
+    QString q_assistant_message = QString::fromStdString(assistant_message); // convert the string to a QString
+    return q_assistant_message; // return the message for sendMessage() to display
 }
 
 
