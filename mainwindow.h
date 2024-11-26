@@ -53,6 +53,8 @@ private slots:
 
     void sendMessage();
 
+    void updateStreamingResponse(const QString& partialResponse);
+
     void on_btnMinimizeChick_clicked();
 
     void on_btnSubmitQ_clicked();
@@ -128,8 +130,23 @@ private:
     QString query;
     QString file;
 
+    struct StreamCallbackData {
+        std::string* assistantMessage;
+        MainWindow* mainWindow;  // Ensure this is a pointer
+
+        // Constructor to explicitly initialize both members
+        StreamCallbackData(std::string* message, MainWindow* window)
+            : assistantMessage(message), mainWindow(window) {}
+    };
+
     // Response string for conversational assistant
-    std::string assistant_message;
+    // std::string assistant_message;
+
+    size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
+    size_t StreamCallback(void* contents, size_t size, size_t nmemb, void* userp);
+
+    static size_t WriteCallbackWrapper(void* contents, size_t size, size_t nmemb, void* userp);
+    static size_t StreamCallbackWrapper(void* contents, size_t size, size_t nmemb, void* userp);
 
     QString generateResponse(QString query); // Helper function to generate bot responses
 };

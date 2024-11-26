@@ -24,6 +24,8 @@ using json = nlohmann::json;
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QScrollBar>
+#include <QFile>
+#include <QDir>
 // #include <QPushButton>
 
 bool admin = false;
@@ -53,8 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
         // Initialize CURL once
         curl = curl_easy_init();
         if (!curl) {
-            // throw std::runtime_error("Failed to initialize CURL.");
-            std::cerr << "CURL initialization failed!" << std::endl;
+            throw std::runtime_error("Failed to initialize CURL.");
         }
 
         // Headers
@@ -80,10 +81,6 @@ MainWindow::MainWindow(QWidget *parent)
 
         // std::cout << "Enter a clothing description (or type 'exit' to quit): " << std::endl;
         // std::string chick_intro = "Enter a clothing description";
-
-        // Clean up
-        curl_slist_free_all(headers);
-        curl_easy_cleanup(curl);
     }
     catch (const std::exception& ex) {
         std::cerr << "Error: " << ex.what() << std::endl;
@@ -93,6 +90,17 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    // clean up
+    if (headers) {
+        curl_slist_free_all(headers);
+        headers = NULL;
+    }
+
+    if (curl) {
+        curl_easy_cleanup(curl);
+        curl = NULL;
+    }
+
     delete ui;
 }
 
@@ -498,7 +506,7 @@ void MainWindow::on_btnOrderMan_clicked()
 // LLM CODE ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Callback function to capture the response data
-size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
+size_t MainWindow::WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
 {
     size_t totalSize = size * nmemb;
     ((std::string*)userp)->append((char*)contents, totalSize);
@@ -506,11 +514,14 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
 }
 
 // Callback function to handle streaming data from the conversational assistant
-size_t StreamCallback(void* contents, size_t size, size_t nmemb, void* userp)
+size_t MainWindow::StreamCallback(void* contents, size_t size, size_t nmemb, void* userp)
 {
     size_t totalSize = size * nmemb;
     std::string data((char*)contents, totalSize);
-    std::string* assistant_message = static_cast<std::string*>(userp);
+    StreamCallbackData* callbackData = static_cast<StreamCallbackData*>(userp);
+
+    // std::string* assistant_message = static_cast<std::string*>(userp);
+    std::string* assistant_message = callbackData->assistantMessage;
 
     std::istringstream stream(data);
     std::string line;
@@ -528,8 +539,9 @@ size_t StreamCallback(void* contents, size_t size, size_t nmemb, void* userp)
                 if (json_line.contains("choices") && json_line["choices"].is_array() && !json_line["choices"].empty()) {
                     std::string partial = json_line["choices"][0]["delta"].value("content", "");
                     if (!partial.empty()) {
-                        std::lock_guard<std::mutex> lock(mtx);
-                        std::cout << partial << std::flush;
+                        // std::lock_guard<std::mutex> lock(mtx);
+                        // std::cout << partial << std::flush;
+                        QMetaObject::invokeMethod(callbackData->mainWindow, "updateStreamingResponse", Qt::QueuedConnection, Q_ARG(QString, QString::fromStdString(partial)));
                         *assistant_message += partial;
                     }
                 }
@@ -541,6 +553,53 @@ size_t StreamCallback(void* contents, size_t size, size_t nmemb, void* userp)
     }
 
     return totalSize;
+}
+
+void MainWindow::updateStreamingResponse(const QString& partialResponse)
+{
+    // Append the partial response to the text edit
+    ui->tEChick->moveCursor(QTextCursor::End);
+    ui->tEChick->insertPlainText(partialResponse);
+
+    // Optional: Auto-scroll to bottom
+    QScrollBar *scrollBar = ui->tEChick->verticalScrollBar();
+    scrollBar->setValue(scrollBar->maximum());
+}
+
+size_t MainWindow::WriteCallbackWrapper(void* contents, size_t size, size_t nmemb, void* userp)
+{
+    std::string* response_string = static_cast<std::string*>(userp);
+
+    size_t totalSize = size * nmemb;
+    response_string->append(static_cast<char*>(contents), totalSize);
+
+    return totalSize;
+}
+
+size_t MainWindow::StreamCallbackWrapper(void* contents, size_t size, size_t nmemb, void* userp)
+{
+    qDebug() << "StreamCallbackWrapper called";
+
+    StreamCallbackData* callbackData = static_cast<StreamCallbackData*>(userp);
+    if (!callbackData) {
+        qDebug() << "Callback data is null";
+        return 0;
+    }
+
+    qDebug() << "MainWindow pointer in wrapper:"
+             << (callbackData->mainWindow ? "Valid" : "Null");
+
+    if (!callbackData->mainWindow) {
+        qDebug() << "MainWindow pointer is null in StreamCallbackWrapper";
+        return 0;
+    }
+
+    if (!callbackData->assistantMessage) {
+        qDebug() << "Assistant message pointer is null";
+        return 0;
+    }
+
+    return callbackData->mainWindow->StreamCallback(contents, size, nmemb, userp);
 }
 
 // Updated Function to extract clothing information from the structured output API response
@@ -601,37 +660,23 @@ void import_csv(QString qFile)
     // std::string matchedItems = retrieveItems(clothing_info, csvItems);
 }
 
-// CHAT BOT ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// i commented out all the cout and cin code
-// initialization of curl and message structure/history is done in this constructor
-// the variables are made in mainwindow.h
-// and then used by the chatbot in generateResponse()
-// -rhi
-// ChatBotWindow::ChatBotWindow(QWidget *parent)
-//     : QMainWindow(parent), ui(new Ui::MainWindow) {
-//     ui->setupUi(this);
-
-//     // ui->wdgChickInner->setParent(this);
-//     // ui->tEChick->setParent(this);
-//     // ui->btnChickQuery->setParent(this);
-//     // ui->txtChickQuery->setParent(this);
-
-//     // qDebug() << "btnChickQuery parent:" << ui->btnChickQuery->parent();
-
-
-// }
-
-// ChatBotWindow::~ChatBotWindow() {
-//     delete ui;
-// }
-
 void MainWindow::sendMessage() {
     // get the user's query
     QString query = ui->txtChickQuery->text();
 
     if (!query.isEmpty()) {
+        qDebug() << "Sending message - MainWindow pointer:" << this;
+
         // display user message
         ui->tEChick->append("You: " + query);
+
+        // Explicitly check 'this' before generating response
+        if (this) {
+            QString botResponse = generateResponse(query);
+            ui->tEChick->append("Chick: " + botResponse);
+        } else {
+            qDebug() << "ERROR: MainWindow pointer is null during sendMessage";
+        }
 
         // generate and display bot response
         QString botResponse = generateResponse(query);
@@ -647,8 +692,20 @@ void MainWindow::sendMessage() {
 }
 
 QString MainWindow::generateResponse(QString query) {
+    qDebug() << "Generating response for query: " << query;
 
     std::string user_message = query.toStdString();
+    // Response string for conversational assistant
+    std::string assistant_message;
+
+    StreamCallbackData streamData{&assistant_message, this};
+
+    qDebug() << "StreamCallbackData created with MainWindow pointer:"
+             << (streamData.mainWindow ? "Valid" : "Null");
+
+    // Set up CURL with the new callback
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, StreamCallbackWrapper);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &streamData);
 
     // =======================
     // First API Call: Structured Output
@@ -678,7 +735,7 @@ QString MainWindow::generateResponse(QString query) {
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl, CURLOPT_POST, 1L);
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data_structured.c_str());
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallbackWrapper);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string_structured);
 
     // Perform the structured output request
@@ -699,7 +756,10 @@ QString MainWindow::generateResponse(QString query) {
         // =======================
         // Retrieve and Format Matching Items
         // =======================
-        auto csvItems = readCSVData("data.csv");
+        QString filePath = QDir::currentPath() + "data.csv";
+        auto csvItems = readCSVData(filePath.toStdString());
+
+
         std::string matchedItems = retrieveItems(clothing_info, csvItems);
 
 
@@ -723,16 +783,17 @@ QString MainWindow::generateResponse(QString query) {
         // Convert the JSON payload to string
         std::string json_data_conversational = payload_conversational.dump();
 
-        // Response string for conversational assistant
-        std::string assistant_message;
+
 
         // Set the CURL options for conversational assistant
         curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:1234/v1/chat/completions"); // Replace with actual URL if different
         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data_conversational.c_str());
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, StreamCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &assistant_message);
+        // curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, StreamCallbackWrapper);
+        // curl_easy_setopt(curl, CURLOPT_WRITEDATA, &assistant_message);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, StreamCallbackWrapper);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &streamData);
 
-        std::cout << "Assistant: ";
+        // std::cout << "Assistant: ";
         // Perform the conversational assistant request
         CURLcode res_conversational = curl_easy_perform(curl);
         if (res_conversational != CURLE_OK) {
@@ -746,12 +807,16 @@ QString MainWindow::generateResponse(QString query) {
         // std::cout << std::endl;
     }
     catch (const std::exception& ex) {
-        std::cerr << "Error parsing response: " << ex.what() << std::endl;
-        return "There was an issue. Please try again";
+        qDebug() << "Exception: " << ex.what();
+        return "An error occurred: " + QString::fromStdString(ex.what());
+    }
+    catch (...) {
+        qDebug() << "Unknown exception occurred";
+        return "An unknown error occurred";
     }
 
-    QString q_assistant_message = QString::fromStdString(assistant_message); // convert the string to a QString
-    return q_assistant_message; // return the message for sendMessage() to display
+    qDebug() << "Assistant message: " << QString::fromStdString(assistant_message);
+    return QString::fromStdString(assistant_message); // convert the string to a QString and return the message for sendMessage() to display
 }
 
 
