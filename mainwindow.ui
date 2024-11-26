@@ -1722,7 +1722,7 @@
          <string notr="true">background-color: lightgrey; border-radius: 1px</string>
         </property>
         <property name="text">
-         <string>i want a jacket</string>
+         <string/>
         </property>
        </widget>
        <widget class="QPushButton" name="btnChickQuery">
@@ -1841,10 +1841,6 @@
        </property>
       </widget>
      </widget>
-     <zorder>wdgChickOuter</zorder>
-     <zorder>swdgHome</zorder>
-     <zorder>wdgHeader</zorder>
-     <zorder>btnChick</zorder>
     </widget>
     <widget class="QWidget" name="pgeLogIn">
      <widget class="QLabel" name="lblLogInLogo">

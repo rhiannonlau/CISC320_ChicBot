@@ -1,0 +1,52 @@
+name,description,color,size,type,price,brand,material,quantity
+Classic Red Shirt,A classic red shirt made from 100% cotton.,Red,M,Shirt,29.99,Nike,Cotton,50
+Blue Denim Jacket,A stylish blue denim jacket.,Blue,L,Jacket,59.99,Adidas,Denim,30
+Green Summer Dress,A light green summer dress perfect for warm weather.,Green,S,Dress,39.99,Puma,Silk,20
+Black Leather Belt,A black leather belt with a sleek design.,Black,M,Belt,19.99,Gucci,Leather,100
+White Wool Sweater,A warm white wool sweater for cold days.,White,L,Sweater,49.99,Reebok,Wool,40
+Yellow Nylon Shorts,Bright yellow shorts made from durable nylon.,Yellow,XL,Shorts,24.99,UnderArmour,Nylon,60
+Brown Suede Shoes,Comfortable brown suede shoes.,Brown,42,Shoes,89.99,NewBalance,Suede,25
+Pink Polyester Skirt,A vibrant pink polyester skirt suitable for summer.,Pink,S,Skirt,24.99,UnderArmour,Polyester,25
+Grey Wool Coat,A warm grey wool coat for winter.,Grey,XL,Coat,89.99,NewBalance,Wool,15
+Purple Cotton Hat,A stylish purple cotton hat.,Purple,M,Hat,15.99,Chanel,Cotton,60
+Orange Spandex Socks,Elastic orange socks for sports.,Orange,L,Socks,9.99,Adidas,Spandex,150
+White Linen Pants,Lightweight white linen pants.,White,M,Pants,34.99,Prada,Linen,40
+Blue Silk Scarf,Elegant blue silk scarf.,Blue,S,Scarf,29.99,Gucci,Silk,70
+Black Leather Gloves,Premium black leather gloves.,Black,L,Gloves,49.99,Gucci,Leather,30
+Green Wool Hat,A warm green wool hat for cold weather.,Green,M,Hat,19.99,Reebok,Wool,50
+Red Cotton Socks,Comfortable red cotton socks.,Red,S,Socks,12.99,Nike,Cotton,200
+None,Unspecified item with no specific attributes.,None,None,None,0.00,None,None,0
+Blue Polyester Jacket,A lightweight blue polyester jacket.,Blue,M,Jacket,34.99,Puma,Polyester,45
+Yellow Wool Scarf,A cozy yellow wool scarf.,Yellow,L,Scarf,22.99,Adidas,Wool,80
+Pink Leather Belt,A pink leather belt to complement outfits.,Pink,M,Belt,29.99,Chanel,Leather,40
+Grey Denim Pants,Durable grey denim pants.,Grey,L,Pants,39.99,Levi's,Denim,35
+Purple Silk Dress,A luxurious purple silk dress.,Purple,XL,Dress,59.99,Prada,Silk,10
+White Cotton T-Shirt,A plain white cotton t-shirt.,White,S,Shirt,14.99,Nike,Cotton,100
+Black Nylon Jacket,A sleek black nylon jacket.,Black,M,Jacket,54.99,UnderArmour,Nylon,25
+Green Spandex Shorts,Flexible green spandex shorts.,Green,S,Shorts,19.99,Reebok,Spandex,75
+Brown Leather Jacket,A rugged brown leather jacket.,Brown,XL,Jacket,99.99,Gucci,Leather,15
+Red Wool Sweater,A cozy red wool sweater.,Red,L,Sweater,44.99,Adidas,Wool,50
+Blue Cotton Shorts,Comfortable blue cotton shorts.,Blue,M,Shorts,19.99,Nike,Cotton,80
+Yellow Silk Scarf,A bright yellow silk scarf.,Yellow,S,Scarf,27.99,Chanel,Silk,60
+Pink Polyester Dress,A stylish pink polyester dress.,Pink,M,Dress,34.99,Puma,Polyester,20
+Grey Cotton Shirt,A grey cotton shirt suitable for all occasions.,Grey,M,Shirt,24.99,Reebok,Cotton,90
+Black Wool Coat,A black wool coat for chilly days.,Black,XL,Coat,79.99,UnderArmour,Wool,20
+White Leather Belt,A white leather belt with a modern design.,White,M,Belt,24.99,Prada,Leather,30
+Green Denim Jacket,A green denim jacket for a trendy look.,Green,L,Jacket,59.99,Levi's,Denim,25
+Orange Cotton T-Shirt,A vibrant orange cotton t-shirt.,Orange,S,Shirt,19.99,Nike,Cotton,110
+Purple Nylon Shorts,Durable purple nylon shorts.,Purple,M,Shorts,21.99,Adidas,Nylon,40
+Brown Wool Sweater,A brown wool sweater for casual wear.,Brown,M,Sweater,39.99,Reebok,Wool,35
+Blue Silk Dress,A stunning blue silk dress.,Blue,XL,Dress,69.99,Gucci,Silk,8
+Red Leather Jacket,A bold red leather jacket.,Red,XL,Jacket,119.99,Chanel,Leather,5
+White Polyester Skirt,A white polyester skirt for everyday wear.,White,S,Skirt,19.99,Puma,Polyester,30
+Grey Spandex Shorts,Comfortable grey spandex shorts.,Grey,M,Shorts,18.99,UnderArmour,Spandex,50
+Pink Wool Hat,A cute pink wool hat.,Pink,S,Hat,17.99,NewBalance,Wool,60
+Black Cotton Pants,Classic black cotton pants.,Black,L,Pants,29.99,Nike,Cotton,70
+Yellow Denim Jacket,A yellow denim jacket to brighten your wardrobe.,Yellow,M,Jacket,64.99,Adidas,Denim,20
+Green Silk Scarf,A luxurious green silk scarf.,Green,S,Scarf,32.99,Prada,Silk,40
+Purple Leather Gloves,Stylish purple leather gloves.,Purple,M,Gloves,39.99,Chanel,Leather,25
+Orange Wool Sweater,A warm orange wool sweater.,Orange,L,Sweater,45.99,Reebok,Wool,30
+White Spandex Shorts,Flexible white spandex shorts.,White,M,Shorts,22.99,UnderArmour,Spandex,55
+Brown Cotton Hat,A brown cotton hat for casual wear.,Brown,S,Hat,16.99,Levi's,Cotton,80
+Grey Leather Belt,A grey leather belt with a classic design.,Grey,M,Belt,26.99,Gucci,Leather,40
+None,Another unspecified item with no specific attributes.,None,None,None,0.00,None,None,0

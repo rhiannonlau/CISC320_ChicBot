@@ -163,6 +163,7 @@ void MainWindow::logIn()
     ui->swdgMain->setCurrentIndex(1); // main page
     ui->txtLogInUser->clear();
     ui->txtLogInPwd->clear();
+    ui->wdgChickOuter->hide();
 }
 
 // user has no account, so they go from log in page to registration page
