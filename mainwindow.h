@@ -61,9 +61,9 @@ private slots:
 
     void on_btnExitSearch_clicked();
 
-    void on_btnSampleAddToCart_clicked();
+    // void on_btnSearch_clicked();
 
-    void on_btnSearch_clicked();
+    void search();
 
     void on_btnRemoveAll_clicked();
 
@@ -114,6 +114,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
+    std::vector<json> csvItems;
+
     CURL* curl;
 
     struct curl_slist* headers = NULL;
@@ -149,6 +151,9 @@ private:
     static size_t StreamCallbackWrapper(void* contents, size_t size, size_t nmemb, void* userp);
 
     QString generateResponse(QString query); // Helper function to generate bot responses
+    void import_csv(QString fileName);
+    void displayItemList(const std::vector<json>& items);
+    void addItemToCart(const json& item);
 };
 
 // class ChatBotWindow : public QMainWindow {

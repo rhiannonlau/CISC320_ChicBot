@@ -13,6 +13,8 @@
 
 using json = nlohmann::json;
 
+#include <QFile>
+
 // Enum Definitions
 const std::vector<std::string> COLOR_ENUM = {
     "Red", "Blue", "Green", "Yellow", "Brown", "Black", "Orange", "Pink", "Purple", "White", "Grey", "None"

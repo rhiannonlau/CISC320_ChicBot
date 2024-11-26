@@ -3,6 +3,14 @@
 #include <nlohmann/json.hpp>
 #include <numeric> // For std::accumulate
 
+#include <QString>
+#include <QFile>
+#include <QFileInfo>
+#include <QIODevice>
+#include <QStringList>
+#include <QTextStream>
+#include <QDebug>
+
 // Function to safely concatenate array elements into a comma-separated string
 std::string concatenateArray(const json& json_array, const std::string& default_value) {
     if (!json_array.is_array() || json_array.empty()) {

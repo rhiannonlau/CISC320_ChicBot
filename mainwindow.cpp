@@ -26,6 +26,8 @@ using json = nlohmann::json;
 #include <QScrollBar>
 #include <QFile>
 #include <QDir>
+#include <QThread>
+#include <QListWidget>
 // #include <QPushButton>
 
 bool admin = false;
@@ -41,6 +43,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->swdgHome->setCurrentIndex(0); // home page
     ui->wdgChickOuter->hide();
 
+    import_csv("data.csv");
+    displayItemList(csvItems);
+
     // ChatBotWindow *chick = new ChatBotWindow(this);
     // chick->move(570, 130);
     // chick->resize(191, 261);
@@ -50,6 +55,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Connect signals to slots
     connect(ui->btnChickQuery, &QPushButton::clicked, this, &MainWindow::sendMessage);
     connect(ui->txtChickQuery, &QLineEdit::returnPressed, this, &MainWindow::sendMessage);
+    connect(ui->btnSearch, &QPushButton::clicked, this, &MainWindow::search);
+    connect(ui->txtSearch, &QLineEdit::returnPressed, this, &MainWindow::search);
 
     try {
         // Initialize CURL once
@@ -285,25 +292,156 @@ void MainWindow::on_btnSubmitQ_clicked()
     }
 }
 
-// search option in shop tab
-void MainWindow::on_btnSearch_clicked()
-{
-    QString search = ui->txtSearch->text();
-    ui->txtSearch->clear();
+void MainWindow::displayItemList(const std::vector<json>& items) {
+    // Clear any existing items in the shop page
+    // QLayoutItem* item;
+    // while ((item = ui->pgeShop->layout()->takeAt(0)) != nullptr) {
+    //     delete item->widget();
+    //     delete item;
+    // }
+
+    // Create list widget
+    QListWidget* lwdgItemList = new QListWidget(ui->pgeShop);
+    lwdgItemList->move(40, 50);
+    // 690, 310
+    lwdgItemList->resize(650, 260);
+
+    // Populate list
+    for (const auto& item : items) {
+        // Create list widget item
+        QListWidgetItem* lwdgItem = new QListWidgetItem();
+
+        // Create widget to hold item details
+        QWidget* wdgItem = new QWidget();
+        QVBoxLayout* lytItem = new QVBoxLayout(wdgItem);
+
+        // Name Label
+        QLabel* lblItemName = new QLabel(QString::fromStdString(item["name"].get<std::string>()));
+        lblItemName->setStyleSheet("font-weight: bold; font-size: 16px;");
+        lytItem->addWidget(lblItemName);
+
+        // Description Label
+        QLabel* lblItemDesc = new QLabel(QString::fromStdString(item["description"].get<std::string>()));
+        lblItemDesc->setStyleSheet("font-style: italic;");
+        lytItem->addWidget(lblItemDesc);
+
+        // Details Label
+        std::string details =
+            "Brand: " + item["brand"][0].get<std::string>() + " | Color: " + item["color"][0].get<std::string>() + " | Size: " + item["size"][0].get<std::string>() + " | Material: " + item["material"][0].get<std::string>();
+        QLabel* lblItemDet = new QLabel(QString::fromStdString(details));
+        lblItemDet->setStyleSheet("color: dark gray;");
+        lytItem->addWidget(lblItemDet);
+
+        // Price Label
+        QLabel* lblItemPrice = new QLabel(QString("Price: $%1").arg(QString::number(std::stod(item["min_price"].get<std::string>()), 'f', 2)));
+        lblItemPrice->setStyleSheet("color: green; font-weight: bold;");
+        lytItem->addWidget(lblItemPrice);
+
+        // Add to Cart Button
+        QPushButton* btnAddToCart = new QPushButton("Add to Cart");
+        btnAddToCart->setProperty("item", QVariant::fromValue(item));
+
+        // Connect button to your cart adding method
+        connect(btnAddToCart, &QPushButton::clicked, this, [this](){
+            QPushButton* btn = qobject_cast<QPushButton*>(sender());
+            if (btn) {
+                json item = btn->property("item").value<json>();
+                this->addItemToCart(item);
+            }
+        });
+
+        // Horizontal layout for button (to align right)
+        QHBoxLayout* buttonLayout = new QHBoxLayout();
+        buttonLayout->addStretch();
+        buttonLayout->addWidget(btnAddToCart);
+        lytItem->addLayout(buttonLayout);
+
+        // Set item widget
+        lwdgItem->setSizeHint(wdgItem->sizeHint());
+        lwdgItemList->addItem(lwdgItem);
+        lwdgItemList->setItemWidget(lwdgItem, wdgItem);
+    }
+
+    // Add list to shop page layout
+    QVBoxLayout* shopLayout = qobject_cast<QVBoxLayout*>(ui->pgeShop->layout());
+    if (shopLayout) {
+        shopLayout->addWidget(lwdgItemList);
+    }
 }
+
+void MainWindow::addItemToCart(const json& item) {
+    try {
+        // Convert JSON to your cart item format
+        std::string itemName = item["name"].get<std::string>();
+        double price = std::stod(item["min_price"].get<std::string>());
+
+        // Example of adding to a cart (you'd replace this with your actual implementation)
+        qDebug() << "Added to cart:"
+                 << QString::fromStdString(itemName)
+                 << "Price:" << price;
+
+        // Optionally update cart UI or perform other actions
+    }
+    catch (const std::exception& e) {
+        qDebug() << "Error adding item to cart:" << e.what();
+    }
+}
+
+// search option in shop tab
+// void MainWindow::on_btnSearch_clicked()
+// {
+//     QString search = ui->txtSearch->text();
+//     ui->txtSearch->clear();
+// }
 
 // clears search line in shop tab
 void MainWindow::on_btnExitSearch_clicked()
 {
     ui->txtSearch->clear();
+    displayItemList(csvItems);
 }
 
-// sample add to cart button
-void MainWindow::on_btnSampleAddToCart_clicked()
+void MainWindow::search()
 {
-    // add to cart
-    // show item in cart page
-    // send a message that it was added to cart
+    QString search = ui->txtSearch->text();
+
+    std::vector<json> searchResults;
+
+    // If search term is empty, return all items
+    if (search.trimmed().isEmpty()) {
+        return;  // Assuming 'items' is a member variable holding all items
+    }
+
+    // Convert search term to lowercase for case-insensitive search
+    QString lowercaseSearch = search.toLower();
+
+    // Iterate through all items
+    for (const auto& item : csvItems) {
+        // Convert item fields to lowercase for comparison
+        QString name = QString::fromStdString(item["name"].get<std::string>()).toLower();
+        QString description = QString::fromStdString(item["description"].get<std::string>()).toLower();
+
+        // Search in additional fields
+        QString brand = QString::fromStdString(item["brand"][0].get<std::string>()).toLower();
+        QString color = QString::fromStdString(item["color"][0].get<std::string>()).toLower();
+        QString size = QString::fromStdString(item["size"][0].get<std::string>()).toLower();
+        QString material = QString::fromStdString(item["material"][0].get<std::string>()).toLower();
+
+        // Check if search term is in any of the fields
+        bool matchFound =
+            name.contains(lowercaseSearch) ||
+            description.contains(lowercaseSearch) ||
+            brand.contains(lowercaseSearch) ||
+            color.contains(lowercaseSearch) ||
+            size.contains(lowercaseSearch) ||
+            material.contains(lowercaseSearch);
+
+        if (matchFound) {
+            searchResults.push_back(item);
+        }
+    }
+
+    displayItemList(searchResults);
 }
 
 // remove all items from cart
@@ -478,9 +616,8 @@ void MainWindow::on_btnImportCSV_clicked()
 
     if (!file.isEmpty())
     {
-        // ui->lblFilePath->setText(filePath);
-        // load stuff
-
+        import_csv(file);
+        displayItemList(csvItems);
     }
 
     else
@@ -548,6 +685,7 @@ size_t MainWindow::StreamCallback(void* contents, size_t size, size_t nmemb, voi
             }
             catch (json::parse_error& e) {
                 // Handle parsing error if necessary
+                qDebug() << "JSON Parse Error: " << QString::fromStdString(e.what());
             }
         }
     }
@@ -557,7 +695,21 @@ size_t MainWindow::StreamCallback(void* contents, size_t size, size_t nmemb, voi
 
 void MainWindow::updateStreamingResponse(const QString& partialResponse)
 {
-    // Append the partial response to the text edit
+    // Ensure this is called only on the main thread
+    if (QThread::currentThread() != this->thread()) {
+        qDebug() << "updateStreamingResponse called from wrong thread!";
+        return;
+    }
+
+    // Prevent duplicate updates
+    static QString lastUpdate;
+    if (partialResponse == lastUpdate) {
+        qDebug() << "Duplicate response detected and prevented";
+        return;
+    }
+    lastUpdate = partialResponse;
+
+    // Move cursor to end before inserting
     ui->tEChick->moveCursor(QTextCursor::End);
     ui->tEChick->insertPlainText(partialResponse);
 
@@ -585,9 +737,6 @@ size_t MainWindow::StreamCallbackWrapper(void* contents, size_t size, size_t nme
         qDebug() << "Callback data is null";
         return 0;
     }
-
-    qDebug() << "MainWindow pointer in wrapper:"
-             << (callbackData->mainWindow ? "Valid" : "Null");
 
     if (!callbackData->mainWindow) {
         qDebug() << "MainWindow pointer is null in StreamCallbackWrapper";
@@ -653,11 +802,11 @@ std::string extract_assistant_message(const std::string& response_string)
     return response_json["choices"][0]["message"]["content"];
 }
 
-void import_csv(QString qFile)
+void MainWindow::import_csv(QString fileName)
 {
-    std::string file = qFile.toStdString();
-    auto csvItems = readCSVData(file);
-    // std::string matchedItems = retrieveItems(clothing_info, csvItems);
+    QString filePath = QDir::currentPath() + "/" + fileName;
+    // qDebug() << filePath;
+    csvItems = readCSVData(filePath.toStdString());
 }
 
 void MainWindow::sendMessage() {
@@ -673,14 +822,14 @@ void MainWindow::sendMessage() {
         // Explicitly check 'this' before generating response
         if (this) {
             QString botResponse = generateResponse(query);
-            ui->tEChick->append("Chick: " + botResponse);
+            ui->tEChick->append("Chick: ");
         } else {
             qDebug() << "ERROR: MainWindow pointer is null during sendMessage";
         }
 
         // generate and display bot response
-        QString botResponse = generateResponse(query);
-        ui->tEChick->append("Chick: " + botResponse);
+        // QString botResponse = generateResponse(query);
+        // ui->tEChick->append("Chick: " + botResponse);
 
         // clear the input
         ui->txtChickQuery->clear();
@@ -756,10 +905,6 @@ QString MainWindow::generateResponse(QString query) {
         // =======================
         // Retrieve and Format Matching Items
         // =======================
-        QString filePath = QDir::currentPath() + "data.csv";
-        auto csvItems = readCSVData(filePath.toStdString());
-
-
         std::string matchedItems = retrieveItems(clothing_info, csvItems);
 
 

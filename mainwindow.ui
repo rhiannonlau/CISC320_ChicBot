@@ -193,7 +193,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="pgeHome">
        <widget class="QLabel" name="imgMainLogo">
@@ -258,64 +258,6 @@
         <property name="text">
          <string>Welcome to ChicBot Shop</string>
         </property>
-       </widget>
-       <widget class="QWidget" name="wdgSampleItem" native="true">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>70</y>
-          <width>651</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: white</string>
-        </property>
-        <widget class="QLabel" name="lblSampleItemName">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>111</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Prada Leather Jacket</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lblSampleItemPrice">
-         <property name="geometry">
-          <rect>
-           <x>320</x>
-           <y>10</y>
-           <width>31</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>$100</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btnSampleAddToCart">
-         <property name="geometry">
-          <rect>
-           <x>560</x>
-           <y>10</y>
-           <width>75</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">border-radius: 1px;</string>
-         </property>
-         <property name="text">
-          <string>Add to cart</string>
-         </property>
-         <property name="flat">
-          <bool>false</bool>
-         </property>
-        </widget>
        </widget>
        <widget class="QWidget" name="wdgSearch" native="true">
         <property name="geometry">
@@ -1904,7 +1846,7 @@
          <string notr="true">background-color: lightgrey; border-radius: 1px</string>
         </property>
         <property name="text">
-         <string/>
+         <string>i want a jacket</string>
         </property>
        </widget>
        <widget class="QPushButton" name="btnChickQuery">
@@ -2009,9 +1951,9 @@
       <widget class="QPushButton" name="btnMinimizeChick">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>240</x>
          <y>0</y>
-         <width>41</width>
+         <width>21</width>
          <height>21</height>
         </rect>
        </property>
@@ -2023,6 +1965,10 @@
        </property>
       </widget>
      </widget>
+     <zorder>wdgChickOuter</zorder>
+     <zorder>swdgHome</zorder>
+     <zorder>wdgHeader</zorder>
+     <zorder>btnChick</zorder>
     </widget>
     <widget class="QWidget" name="pgeLogIn">
      <widget class="QLabel" name="lblLogInLogo">
