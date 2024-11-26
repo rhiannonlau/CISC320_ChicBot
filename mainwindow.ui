@@ -1744,9 +1744,9 @@
        <widget class="QLabel" name="lblLLMDisclaimer">
         <property name="geometry">
          <rect>
-          <x>100</x>
+          <x>90</x>
           <y>250</y>
-          <width>81</width>
+          <width>101</width>
           <height>20</height>
          </rect>
         </property>
@@ -1754,7 +1754,7 @@
          <string notr="true">font: 10px</string>
         </property>
         <property name="text">
-         <string>Powered by LLM</string>
+         <string>Powered by LM Studio</string>
         </property>
         <property name="textFormat">
          <enum>Qt::TextFormat::AutoText</enum>
@@ -1960,6 +1960,22 @@
       </property>
       <property name="openExternalLinks">
        <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>330</y>
+        <width>371</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Hint for TA marking: For a user account, try user1 for the username and password. For an admin account, try admin1 for the username and password.</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>

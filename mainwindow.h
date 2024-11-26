@@ -47,9 +47,7 @@ private slots:
 
     void on_btnChick_clicked();
 
-    // void on_btnChickQuery_clicked();
-
-    void sendMessage();
+    void sendMessage(); // helper function to display the chatbot's response
 
     void updateStreamingResponse(const QString& partialResponse);
 
@@ -59,9 +57,7 @@ private slots:
 
     void on_btnExitSearch_clicked();
 
-    // void on_btnSearch_clicked();
-
-    void search();
+    void search(); // helper function for searching
 
     void on_btnRemoveAll_clicked();
 
@@ -112,9 +108,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    std::vector<json> csvItems;
-    std::vector<json> cart;
-
+    // Chatbot variables //////
     CURL* curl;
 
     struct curl_slist* headers = NULL;
@@ -128,9 +122,6 @@ private:
     std::vector<json> messages_structured;
     std::vector<json> messages_conversational;
 
-    QString query;
-    QString file;
-
     struct StreamCallbackData {
         std::string* assistantMessage;
         MainWindow* mainWindow;  // Ensure this is a pointer
@@ -140,39 +131,33 @@ private:
             : assistantMessage(message), mainWindow(window) {}
     };
 
-    // Response string for conversational assistant
-    // std::string assistant_message;
+    // Other variables /////
+    std::vector<json> csvItems;
+    std::vector<json> cart;
+    bool admin = false;
+    QString query;
+    QString file;
 
+
+    // Chatbot functions /////
     size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
     size_t StreamCallback(void* contents, size_t size, size_t nmemb, void* userp);
 
+    // wrappers for static calling
     static size_t WriteCallbackWrapper(void* contents, size_t size, size_t nmemb, void* userp);
     static size_t StreamCallbackWrapper(void* contents, size_t size, size_t nmemb, void* userp);
 
     QString generateResponse(QString query); // Helper function to generate bot responses
+
+    // Other functions /////
     void import_csv(QString fileName);
 
+    // Cart and inventory functions
     void displayItemList(const std::vector<json>& items);
     void addItemToCart(const json& item);
     void displayCart(const std::vector<json>& items);
     void removeItemFromCart(const json& item);
     void displayInventory(const std::vector<json>& items);
 };
-
-// class ChatBotWindow : public QMainWindow {
-//     Q_OBJECT
-
-// public:
-//     explicit ChatBotWindow(QWidget *parent = nullptr);
-//     ~ChatBotWindow();
-
-// private slots:
-
-
-// private:
-//     Ui::MainWindow *ui; // Pointer to the UI object
-
-
-// };
 
 #endif // MAINWINDOW_H
