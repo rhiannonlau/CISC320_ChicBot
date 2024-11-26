@@ -45,6 +45,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     import_csv("data.csv");
     displayItemList(csvItems);
+    displayCart(cart);
+    displayInventory(csvItems);
 
     // ChatBotWindow *chick = new ChatBotWindow(this);
     // chick->move(570, 130);
@@ -124,16 +126,28 @@ void MainWindow::on_btnLogIn_clicked()
     // if valid as admin, set admin = true;
     admin = false;
 
+    // if (valid && !admin) // replace valid with condition
+    // {
+    //     logIn();
+    //     ui->btnAdminPanel->hide();
+    // }
 
+    // else if (valid && admin)
+    // {
+    //     logIn();
+    //     ui->btnAdminPanel->show();
+    // }
 
-    if (valid && !admin) // replace valid with condition
+    if (logInUser == "user1" && logInPwd == "user1")
     {
         logIn();
         ui->btnAdminPanel->hide();
     }
 
-    else if (valid && admin)
+    else if (logInUser == "admin1" && logInPwd == "admin1")
     {
+        admin = true;
+
         logIn();
         ui->btnAdminPanel->show();
     }
@@ -149,17 +163,6 @@ void MainWindow::logIn()
     ui->swdgMain->setCurrentIndex(1); // main page
     ui->txtLogInUser->clear();
     ui->txtLogInPwd->clear();
-}
-
-// temporary button for testing: allows quick log in as admin
-// i.e. will log in even with no username or pwd
-void MainWindow::on_btnLogInAdmin_clicked()
-{
-    admin = true;
-
-    ui->swdgMain->setCurrentIndex(1); // main page
-    ui->btnAdminPanel->show();
-    ui->swdgHome->setCurrentIndex(0); // home
 }
 
 // user has no account, so they go from log in page to registration page
@@ -225,6 +228,19 @@ void MainWindow::on_btnShop_clicked()
 void MainWindow::on_btnCart_clicked()
 {
     ui->swdgHome->setCurrentIndex(2); // cart page
+    // get total price
+    double subtotal = 0;
+
+
+    for (const auto& item : cart) {
+        subtotal += std::stod(item["min_price"].get<std::string>());
+    }
+
+    double tax = subtotal * 0.13;
+    double total = subtotal + tax;
+
+    ui->lblTax->setText("Tax: $" + QString::number(tax, 'f', 2));
+    ui->lblTotal->setText("Total: $" + QString::number(total, 'f', 2));
 }
 
 // account tab in header clicked
@@ -288,22 +304,27 @@ void MainWindow::on_btnSubmitQ_clicked()
         // send query to chatbot and show in popup
         ui->txtQuery->clear();
         ui->wdgChickOuter->show();
-        // ui->lblUserText->setText(query);
+        sendMessage();
     }
 }
 
 void MainWindow::displayItemList(const std::vector<json>& items) {
     // Clear any existing items in the shop page
-    // QLayoutItem* item;
-    // while ((item = ui->pgeShop->layout()->takeAt(0)) != nullptr) {
-    //     delete item->widget();
-    //     delete item;
-    // }
+    QLayout* layout = ui->pgeShop->layout();
+    if (layout) {
+        QLayoutItem* item;
+        while ((item = layout->takeAt(0)) != nullptr) {
+            if (QWidget* widget = item->widget()) {
+                widget->hide();
+                widget->deleteLater();
+            }
+            delete item;
+        }
+    }
 
     // Create list widget
     QListWidget* lwdgItemList = new QListWidget(ui->pgeShop);
-    lwdgItemList->move(40, 50);
-    // 690, 310
+    lwdgItemList->move(50, 50);
     lwdgItemList->resize(650, 260);
 
     // Populate list
@@ -375,16 +396,17 @@ void MainWindow::addItemToCart(const json& item) {
         std::string itemName = item["name"].get<std::string>();
         double price = std::stod(item["min_price"].get<std::string>());
 
-        // Example of adding to a cart (you'd replace this with your actual implementation)
-        qDebug() << "Added to cart:"
-                 << QString::fromStdString(itemName)
-                 << "Price:" << price;
+        cart.push_back(item);
 
-        // Optionally update cart UI or perform other actions
+        // Example of adding to a cart (you'd replace this with your actual implementation)
+        qDebug() << "Added to cart:" << QString::fromStdString(itemName) << "Price:" << price;
+        qDebug() << "Last cart item: " << cart.back().dump(4);
     }
     catch (const std::exception& e) {
         qDebug() << "Error adding item to cart:" << e.what();
     }
+
+    displayCart(cart);
 }
 
 // search option in shop tab
@@ -444,10 +466,110 @@ void MainWindow::search()
     displayItemList(searchResults);
 }
 
+void MainWindow::displayCart(const std::vector<json>& items) {
+    // Clear existing cart layout
+    QLayout* layout = ui->pgeCart->layout();
+    if (layout) {
+        QLayoutItem* item;
+        while ((item = layout->takeAt(0)) != nullptr) {
+            if (QWidget* widget = item->widget()) {
+                widget->hide();
+                widget->deleteLater();
+            }
+            delete item;
+        }
+    }
+
+    // Create list widget
+    QListWidget* lwdgItemList = new QListWidget(ui->pgeCart);
+    lwdgItemList->move(160, 50);
+    lwdgItemList->resize(550, 200);
+
+    // Populate list
+    for (const auto& item : items) {
+        // Create list widget item
+        QListWidgetItem* lwdgItem = new QListWidgetItem();
+
+        // Create widget to hold item details
+        QWidget* wdgItem = new QWidget();
+        QVBoxLayout* lytItem = new QVBoxLayout(wdgItem);
+
+        // Name Label
+        QLabel* lblItemName = new QLabel(QString::fromStdString(item["name"].get<std::string>()));
+        lblItemName->setStyleSheet("font-weight: bold; font-size: 16px;");
+        lytItem->addWidget(lblItemName);
+
+        // Price Label
+        QLabel* lblItemPrice = new QLabel(QString("Price: $%1").arg(QString::number(std::stod(item["min_price"].get<std::string>()), 'f', 2)));
+        lblItemPrice->setStyleSheet("color: green; font-weight: bold;");
+        lytItem->addWidget(lblItemPrice);
+
+        // Remove from Cart Button
+        QPushButton* btnRemoveFromCart = new QPushButton("Remove From Cart");
+        btnRemoveFromCart->setProperty("item", QVariant::fromValue(item));
+
+        // Connect button to your cart adding method
+        connect(btnRemoveFromCart, &QPushButton::clicked, this, [this](){
+            QPushButton* btn = qobject_cast<QPushButton*>(sender());
+            if (btn) {
+                json item = btn->property("item").value<json>();
+                this->addItemToCart(item);
+            }
+        });
+
+        // Horizontal layout for button (to align right)
+        QHBoxLayout* buttonLayout = new QHBoxLayout();
+        buttonLayout->addStretch();
+        buttonLayout->addWidget(btnRemoveFromCart);
+        lytItem->addLayout(buttonLayout);
+
+        // Set item widget
+        lwdgItem->setSizeHint(wdgItem->sizeHint());
+        lwdgItemList->addItem(lwdgItem);
+        lwdgItemList->setItemWidget(lwdgItem, wdgItem);
+    }
+
+    // Add list to cart page layout
+    QVBoxLayout* cartLayout = qobject_cast<QVBoxLayout*>(ui->pgeCart->layout());
+    if (cartLayout) {
+        cartLayout->addWidget(lwdgItemList);
+    }
+}
+
+void MainWindow::removeItemFromCart(const json& item) {
+    try {
+        // Convert JSON to your cart item format
+        std::string itemName = item["name"].get<std::string>();
+
+        // Find the item using a lambda to compare specific attributes
+        auto it = std::find_if(cart.begin(), cart.end(),
+                               [&item](const json& cartItem) {
+                                   // Compare specific unique identifiers
+                                   return cartItem["name"] == item["name"] &&
+                                          cartItem["min_price"] == item["min_price"];
+                               });
+
+        // Check if item was found before attempting to remove
+        if (it != cart.end()) {
+            cart.erase(it);
+            qDebug() << "Removed from cart:" << QString::fromStdString(itemName);
+        } else {
+            qDebug() << "Item not found in cart:" << QString::fromStdString(itemName);
+        }
+    }
+    catch (const std::exception& e) {
+        qDebug() << "Error adding item to cart:" << e.what();
+    }
+
+    displayCart(cart);
+}
+
 // remove all items from cart
 void MainWindow::on_btnRemoveAll_clicked()
 {
-
+    cart.clear();
+    qDebug() << "Cart: " << cart.back().dump(4);
+    displayCart(cart);
 }
 
 // continue shopping: return to shop page
@@ -604,9 +726,78 @@ void MainWindow::on_btnAdminPanel_clicked()
 }
 
 // user clicked on inventory tab in admin panel
-void MainWindow::on_btnInventory_clicked()
-{
+void MainWindow::on_btnInventory_clicked(){
     ui->swdgAdminPanel->setCurrentIndex(0); // inventory
+}
+
+void MainWindow::displayInventory(const std::vector<json>& items) {
+    // Clear any existing items in the shop page
+    QLayout* layout = ui->pgeInventory->layout();
+    if (layout) {
+        QLayoutItem* item;
+        while ((item = layout->takeAt(0)) != nullptr) {
+            if (QWidget* widget = item->widget()) {
+                widget->hide();
+                widget->deleteLater();
+            }
+            delete item;
+        }
+    }
+
+    // Create list widget
+    QListWidget* lwdgItemList = new QListWidget(ui->pgeInventory);
+    lwdgItemList->move(50, 50);
+    lwdgItemList->resize(650, 260);
+
+    // Populate list
+    for (const auto& item : items) {
+        // Create list widget item
+        QListWidgetItem* lwdgItem = new QListWidgetItem();
+
+        // Create widget to hold item details
+        QWidget* wdgItem = new QWidget();
+        QVBoxLayout* lytItem = new QVBoxLayout(wdgItem);
+
+        // Name Label
+        QLabel* lblItemName = new QLabel(QString::fromStdString(item["name"].get<std::string>()));
+        lblItemName->setStyleSheet("font-weight: bold; font-size: 16px;");
+        lytItem->addWidget(lblItemName);
+
+        // Description Label
+        QLabel* lblItemDesc = new QLabel(QString::fromStdString(item["description"].get<std::string>()));
+        lblItemDesc->setStyleSheet("font-style: italic;");
+        lytItem->addWidget(lblItemDesc);
+
+        // Details Label
+        std::string details =
+            "Brand: " + item["brand"][0].get<std::string>() + " | Color: " + item["color"][0].get<std::string>() + " | Size: " + item["size"][0].get<std::string>() + " | Material: " + item["material"][0].get<std::string>();
+        QLabel* lblItemDet = new QLabel(QString::fromStdString(details));
+        lblItemDet->setStyleSheet("color: dark gray;");
+        lytItem->addWidget(lblItemDet);
+
+        // Price Label
+        QLabel* lblItemPrice = new QLabel(QString("Price: $%1").arg(QString::number(std::stod(item["min_price"].get<std::string>()), 'f', 2)));
+        lblItemPrice->setStyleSheet("color: green; font-weight: bold;");
+        lytItem->addWidget(lblItemPrice);
+
+        // Inventory Amount Label
+        std::string inventoryAmt =
+            "Inventory: " + std::to_string(item["quantity"].get<int>());
+        QLabel* lblInventoryAmt = new QLabel(QString::fromStdString(inventoryAmt));
+        lblInventoryAmt->setStyleSheet("color: dark gray;");
+        lytItem->addWidget(lblInventoryAmt);
+
+        // Set item widget
+        lwdgItem->setSizeHint(wdgItem->sizeHint());
+        lwdgItemList->addItem(lwdgItem);
+        lwdgItemList->setItemWidget(lwdgItem, wdgItem);
+    }
+
+    // Add list to inventory page layout
+    QVBoxLayout* inventoryLayout = qobject_cast<QVBoxLayout*>(ui->pgeInventory->layout());
+    if (inventoryLayout) {
+        inventoryLayout->addWidget(lwdgItemList);
+    }
 }
 
 // user selected import csv, open file explorer and let them select a file

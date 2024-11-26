@@ -23,8 +23,6 @@ public:
 private slots:
     void on_btnLogIn_clicked();
 
-    void on_btnLogInAdmin_clicked();
-
     void logIn(); // helper function to send user to main page and clear text
 
     void on_lblLogInRegister_linkActivated(const QString &link);
@@ -115,6 +113,7 @@ private:
     Ui::MainWindow *ui;
 
     std::vector<json> csvItems;
+    std::vector<json> cart;
 
     CURL* curl;
 
@@ -152,8 +151,12 @@ private:
 
     QString generateResponse(QString query); // Helper function to generate bot responses
     void import_csv(QString fileName);
+
     void displayItemList(const std::vector<json>& items);
     void addItemToCart(const json& item);
+    void displayCart(const std::vector<json>& items);
+    void removeItemFromCart(const json& item);
+    void displayInventory(const std::vector<json>& items);
 };
 
 // class ChatBotWindow : public QMainWindow {
