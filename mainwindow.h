@@ -13,15 +13,10 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-extern QString file;
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    QString query;
-    std::string assistant_message;
-
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
@@ -55,6 +50,8 @@ private slots:
     void on_btnChick_clicked();
 
     // void on_btnChickQuery_clicked();
+
+    void sendMessage();
 
     void on_btnMinimizeChick_clicked();
 
@@ -114,33 +111,22 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-};
-
-class ChatBotWindow : public QMainWindow {
-    Q_OBJECT
-
-public:
-    explicit ChatBotWindow(QWidget *parent = nullptr);
-    ~ChatBotWindow();
-
-private slots:
-    void sendMessage();
-
-private:
-    Ui::MainWindow *ui; // Pointer to the UI object
 
     CURL* curl;
 
     struct curl_slist* headers = NULL;
 
-    json response_format_json;
-    std::string response_format;
-
     std::string structured_model;
     std::string conversational_model;
 
+    json response_format_json;
+    std::string response_format;
+
     std::vector<json> messages_structured;
     std::vector<json> messages_conversational;
+
+    QString query;
+    QString file;
 
     // Response string for conversational assistant
     std::string assistant_message;
@@ -148,14 +134,20 @@ private:
     QString generateResponse(QString query); // Helper function to generate bot responses
 };
 
-// class ClickAwayWidget : public QWidget {
+// class ChatBotWindow : public QMainWindow {
 //     Q_OBJECT
 
 // public:
-//     explicit ClickAwayWidget(QWidget *parent = nullptr);
-//     ~ClickAwayWidget();
+//     explicit ChatBotWindow(QWidget *parent = nullptr);
+//     ~ChatBotWindow();
 
-// protected:
-//     bool eventFilter(QObject *obj, QEvent *event) override;
+// private slots:
+
+
+// private:
+//     Ui::MainWindow *ui; // Pointer to the UI object
+
+
 // };
+
 #endif // MAINWINDOW_H

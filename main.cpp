@@ -30,9 +30,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    ChatBotWindow chick;
 
     w.show();
-    chick.show();
     return a.exec();
 }

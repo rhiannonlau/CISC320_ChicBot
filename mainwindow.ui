@@ -1868,6 +1868,14 @@
       </property>
      </widget>
      <widget class="QWidget" name="wdgChickOuter" native="true">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>120</y>
+        <width>191</width>
+        <height>261</height>
+       </rect>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: dodgerblue; border-radius: 15px</string>
       </property>

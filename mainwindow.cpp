@@ -27,7 +27,7 @@ using json = nlohmann::json;
 // #include <QPushButton>
 
 bool admin = false;
-QString query;
+// QString query;
 // QString search;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -42,6 +42,53 @@ MainWindow::MainWindow(QWidget *parent)
     // ChatBotWindow *chick = new ChatBotWindow(this);
     // chick->move(570, 130);
     // chick->resize(191, 261);
+
+    // Initialize chatbot
+
+    // Connect signals to slots
+    connect(ui->btnChickQuery, &QPushButton::clicked, this, &MainWindow::sendMessage);
+    connect(ui->txtChickQuery, &QLineEdit::returnPressed, this, &MainWindow::sendMessage);
+
+    try {
+        // Initialize CURL once
+        curl = curl_easy_init();
+        if (!curl) {
+            // throw std::runtime_error("Failed to initialize CURL.");
+            std::cerr << "CURL initialization failed!" << std::endl;
+        }
+
+        // Headers
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+
+        // Define the models
+        structured_model = "qwen2.5-14b-instruct";
+        conversational_model = "qwen2.5-14b-instruct";
+
+        // Build the response_format using the new function
+        response_format_json = buildResponseFormat();
+        response_format = response_format_json.dump();
+
+        // Conversation history for conversational assistant
+        messages_conversational = {
+            {{"role", "system"}, {"content", "You are a helpful fashion assistant, your job is to take the user's clothing request and relevant items from inventory to create recommendations"}}
+        };
+
+        // Conversation history for structured output
+        messages_structured = {
+            {{"role", "system"}, {"content", "You are a text extractor. Please extract clothing from the user's information in the requested format. For any field that the user does not specify, use NONE. Use comma separated list if multiple attributes for a field are specified."}}
+        };
+
+        // std::cout << "Enter a clothing description (or type 'exit' to quit): " << std::endl;
+        // std::string chick_intro = "Enter a clothing description";
+
+        // Clean up
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
+    }
+    catch (const std::exception& ex) {
+        std::cerr << "Error: " << ex.what() << std::endl;
+        // return 1;
+    }
 }
 
 MainWindow::~MainWindow()
@@ -560,77 +607,34 @@ void import_csv(QString qFile)
 // the variables are made in mainwindow.h
 // and then used by the chatbot in generateResponse()
 // -rhi
-ChatBotWindow::ChatBotWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+// ChatBotWindow::ChatBotWindow(QWidget *parent)
+//     : QMainWindow(parent), ui(new Ui::MainWindow) {
+//     ui->setupUi(this);
 
-    // ui->wdgChickInner->setParent(this);
-    // ui->tEChick->setParent(this);
-    // ui->btnChickQuery->setParent(this);
-    // ui->txtChickQuery->setParent(this);
+//     // ui->wdgChickInner->setParent(this);
+//     // ui->tEChick->setParent(this);
+//     // ui->btnChickQuery->setParent(this);
+//     // ui->txtChickQuery->setParent(this);
 
-    // qDebug() << "btnChickQuery parent:" << ui->btnChickQuery->parent();
+//     // qDebug() << "btnChickQuery parent:" << ui->btnChickQuery->parent();
 
-    // Connect signals to slots
-    connect(ui->btnChickQuery, &QPushButton::clicked, this, &ChatBotWindow::sendMessage);
-    connect(ui->txtChickQuery, &QLineEdit::returnPressed, this, &ChatBotWindow::sendMessage);
 
-    try {
-        // Initialize CURL once
-        curl = curl_easy_init();
-        if (!curl) {
-            // throw std::runtime_error("Failed to initialize CURL.");
-            std::cerr << "CURL initialization failed!" << std::endl;
-        }
+// }
 
-        // Headers
-        headers = curl_slist_append(headers, "Content-Type: application/json");
+// ChatBotWindow::~ChatBotWindow() {
+//     delete ui;
+// }
 
-        // Define the models
-        structured_model = "qwen2.5-14b-instruct";
-        conversational_model = "qwen2.5-14b-instruct";
-
-        // Build the response_format using the new function
-        response_format_json = buildResponseFormat();
-        response_format = response_format_json.dump();
-
-        // Conversation history for conversational assistant
-        messages_conversational = {
-            {{"role", "system"}, {"content", "You are a helpful fashion assistant, your job is to take the user's clothing request and relevant items from inventory to create recommendations"}}
-        };
-
-        // Conversation history for structured output
-        messages_structured = {
-            {{"role", "system"}, {"content", "You are a text extractor. Please extract clothing from the user's information in the requested format. For any field that the user does not specify, use NONE. Use comma separated list if multiple attributes for a field are specified."}}
-        };
-
-        // std::cout << "Enter a clothing description (or type 'exit' to quit): " << std::endl;
-        // std::string chick_intro = "Enter a clothing description";
-
-        // Clean up
-        curl_slist_free_all(headers);
-        curl_easy_cleanup(curl);
-    }
-    catch (const std::exception& ex) {
-        std::cerr << "Error: " << ex.what() << std::endl;
-        // return 1;
-    }
-}
-
-ChatBotWindow::~ChatBotWindow() {
-    delete ui;
-}
-
-void ChatBotWindow::sendMessage() {
+void MainWindow::sendMessage() {
     // get the user's query
-    QString message = ui->txtChickQuery->text();
+    QString query = ui->txtChickQuery->text();
 
-    if (!message.isEmpty()) {
+    if (!query.isEmpty()) {
         // display user message
-        ui->tEChick->append("You: " + message);
+        ui->tEChick->append("You: " + query);
 
         // generate and display bot response
-        QString botResponse = generateResponse(message);
+        QString botResponse = generateResponse(query);
         ui->tEChick->append("Chick: " + botResponse);
 
         // clear the input
@@ -642,7 +646,7 @@ void ChatBotWindow::sendMessage() {
     }
 }
 
-QString ChatBotWindow::generateResponse(QString query) {
+QString MainWindow::generateResponse(QString query) {
 
     std::string user_message = query.toStdString();
 
@@ -673,7 +677,7 @@ QString ChatBotWindow::generateResponse(QString query) {
     curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:1234/v1/chat/completions");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl, CURLOPT_POST, 1L);
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data_structured.c_str()); // THE CODE IS CURRENTLY CRASHING AROUND HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data_structured.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string_structured);
 
@@ -681,11 +685,9 @@ QString ChatBotWindow::generateResponse(QString query) {
     CURLcode res_structured = curl_easy_perform(curl);
     if (res_structured != CURLE_OK) {
         std::cerr << "CURL request for structured output failed: " << curl_easy_strerror(res_structured) << std::endl;
-        // continue; // Skip to the next iteration on failure
+        return "There was an issue. Please try again";// continue; // Skip to the next iteration on failure
     }
 
-    // Optional: Log the raw API response for debugging
-    // std::cout << "Raw API Response (Structured Output): " << response_string_structured << std::endl;
 
     try {
         // Extract the clothing information from the response
@@ -699,8 +701,6 @@ QString ChatBotWindow::generateResponse(QString query) {
         // =======================
         auto csvItems = readCSVData("data.csv");
         std::string matchedItems = retrieveItems(clothing_info, csvItems);
-        // Print matched items for debugging
-        // std::cout << matchedItems << std::endl;
 
 
         // =======================
@@ -723,20 +723,22 @@ QString ChatBotWindow::generateResponse(QString query) {
         // Convert the JSON payload to string
         std::string json_data_conversational = payload_conversational.dump();
 
+        // Response string for conversational assistant
+        std::string assistant_message;
+
         // Set the CURL options for conversational assistant
         curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:1234/v1/chat/completions"); // Replace with actual URL if different
         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_data_conversational.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, StreamCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &assistant_message);
 
-        // std::cout << "Assistant: ";
+        std::cout << "Assistant: ";
         // Perform the conversational assistant request
         CURLcode res_conversational = curl_easy_perform(curl);
         if (res_conversational != CURLE_OK) {
             std::cerr << "CURL request for conversational assistant failed: " << curl_easy_strerror(res_conversational) << std::endl;
-            // continue; // Skip to the next iteration on failure
+            return "There was an issue. Please try again";// continue; // Skip to the next iteration on failure
         }
-
 
         // Append the assistant's message to the conversational history
         messages_conversational.push_back({{"role", "assistant"}, {"content", assistant_message}});
@@ -745,8 +747,7 @@ QString ChatBotWindow::generateResponse(QString query) {
     }
     catch (const std::exception& ex) {
         std::cerr << "Error parsing response: " << ex.what() << std::endl;
-        // Optionally, you can print the raw response for debugging
-        // std::cout << "Raw Response (Structured Output): " << response_string_structured << std::endl;
+        return "There was an issue. Please try again";
     }
 
     QString q_assistant_message = QString::fromStdString(assistant_message); // convert the string to a QString
